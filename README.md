@@ -26,6 +26,21 @@ Options:
 ...
 
 ```
+# Init venv 
+```
+$ pipenv sync
+```
+
+```
+(ZPI_AuthServer_Flask) "Your_path_to_dir" $
+```
+
+# To start server
+
+```
+$ flask run
+```
+
 # .env file example
 ```
 # Flask Settings
