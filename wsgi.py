@@ -3,4 +3,5 @@ from auth_server_application import create_app
 app = create_app()
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', debug=True)
+    context = ('server.crt', 'server.key')
+    app.run(debug=True, threaded=True)

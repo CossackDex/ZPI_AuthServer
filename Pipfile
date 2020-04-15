@@ -13,6 +13,7 @@ pymysql = "*"
 mysql-connector-python = "*"
 flask-talisman = "*"
 pyjwt = "*"
+pyopenssl = "*"
 
 [requires]
 python_version = "3.8"
