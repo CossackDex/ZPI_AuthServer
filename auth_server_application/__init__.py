@@ -1,12 +1,11 @@
 # Flask imports
 import os
-# 3-rd part imports
-from uuid import uuid4
 
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from flask_talisman import Talisman
 from werkzeug.security import generate_password_hash
+
+# 3-rd part imports
 
 # Globally accessible libraries
 
@@ -20,7 +19,7 @@ def create_app():
 
     # Init Plugs
     db.init_app(app)
-    Talisman(app)  # FIXME place to enable https only connection
+    # Talisman(app)  # FIXME place to enable https only connection
     from .models import User  # TODO Why i need to import this piece of shit
 
     with app.app_context():
@@ -41,11 +40,10 @@ def create_app():
         # create superuser
         username = os.environ.get('superuser_nickname')
         email = os.environ.get('superuser_email')
-        public_id = str(uuid4())
         role = True
         superuser = True
         password_hash = generate_password_hash(os.environ.get('superuser_password'))
-        superuser = User(public_id=public_id, username=username, email=email, role=role, superuser=superuser,
+        superuser = User(username=username, email=email, role=role, superuser=superuser,
                          password_hash=password_hash)
         db.session.add(superuser)
         db.session.commit()
