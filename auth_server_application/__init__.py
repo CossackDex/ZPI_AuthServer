@@ -20,7 +20,7 @@ def create_app():
 
     # Init Plugs
     db.init_app(app)
-    Talisman(app)  # FIXME place to enable https only connection
+    # Talisman(app)  # FIXME place to enable https only connection
     from .models import User  # TODO Why i need to import this piece of shit
 
     with app.app_context():
