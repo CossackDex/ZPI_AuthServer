@@ -1,0 +1,38 @@
+# Flask Settings
+SECRET_KEY =b'\x05;8_\x9a\x90\x0e1Z\xcfx\xc3\x9a\xe4(\xc4'
+TESTING=True
+FLASK_ENV=Deveopment
+
+# Flask-sqlalchemy settings
+SQLALCHEMY_DATABASE_URI='mysql+mysqlconnector://admin_sso_auth@zpi-sso-auth:1qaz@WSX3edc@zpi-sso-auth.mysql.database.azure.com:3306/user_data_schema'
+SQLALCHEMY_TRACK_MODIFICATIONS=True
+SQLALCHEMY_ECHO="debug"
+
+# superuser credits
+superuser_nickname = "superuser"
+superuser_email = "superuser@gmail.com"
+superuser_password = "admin123"
+
+
+private_key = "-----BEGIN RSA PRIVATE KEY-----
+MIICXQIBAAKBgQCFaUwLZ3Dlwnv2TOBRwymgIP0hcSD0haJreVA7pPnoqcCTA5YO
+05QR2w2e7CiGBkYqsN8CF/abozr9hXGRp90mYuqAL69rVImhW54S/sVzogNV4zI1
+WBrzMcrk+SmjTx1ZyVNwJ86ic8ebEY8RG7FVPD3ie78X1qP2lSUtcyvb9wIDAQAB
+AoGABCLvqKrcZUNSdKCNk/tpHv3m21KWov5BuvNX+YFz/jLFNcm2rV8CCEuycGsC
+FqW7Jze0smvryYeWHKY2jz2VLb/OXQJGOJklPn3myQq+QyUnAEkmAE+KcpGYx1pg
+rwTr5ORurps3i5GJHpUREvhjXrITwVk9Wk7YsxMs6BxXUIECQQDjXc3mwBWSc0Hf
+GINRy3uVm08VyujPC0/N/Nm3rTYJnGuDn6nVKwQs0uinyQn5xfhlUpsCPv9RVKQh
+ItPIJViDAkEAljZrp0Skc7670ISvvC6k+PyBvoBP3mIEpOUa+/AoB6gCY3z3eCnR
+iuaSY8UD7LYPjgsZfbIK46vN7vjditiMfQJBAKUBjM6sFHvGXcXU+mjALh5zKj/8
+lFy+LtqlaDQe5pqvBG/vzcdAgrUtE1/BTRYSEKUoAArvQUf7D2pk5iHYyJUCQF0W
+Cm6UviiwKSmWIGVIrplRuYF5eIVCTsh05dz8vYHJHvnSRnVjzOP78Pn87GqzhD4t
+KLXZMKBYJn0SIhBaE+0CQQCqsTrW5UMSkjoLuamZSinqvzghoWt73w045ZymXsDU
+W8ygxNm9vhsbOufmbVQ1FdTFhyIG00UtBKr/w/pTvJjv
+-----END RSA PRIVATE KEY-----"
+
+public_key = "-----BEGIN PUBLIC KEY-----
+MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCFaUwLZ3Dlwnv2TOBRwymgIP0h
+cSD0haJreVA7pPnoqcCTA5YO05QR2w2e7CiGBkYqsN8CF/abozr9hXGRp90mYuqA
+L69rVImhW54S/sVzogNV4zI1WBrzMcrk+SmjTx1ZyVNwJ86ic8ebEY8RG7FVPD3i
+e78X1qP2lSUtcyvb9wIDAQAB
+-----END PUBLIC KEY-----"
