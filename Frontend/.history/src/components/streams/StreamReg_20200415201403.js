@@ -1,5 +1,5 @@
 import React from "react";
-import RegForm from "../RegForm";
+import RegForm from "./RegForm";
 import { Grid, GridRow, GridColumn } from "semantic-ui-react";
 
 
