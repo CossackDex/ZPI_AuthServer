@@ -21,8 +21,8 @@ def signup():
     db.session.add(new_user)
     try:
         db.session.commit()
-    except IntegrityError:
-        return jsonify(message="user with provided credentials already exist"), 403
+    except IntegrityError as e:
+        return jsonify(message="user with provided credentials already exist", error_message=str(e.orig)), 403
     return jsonify(message="user - {} has been created".format(data['username'])), 201
 
 
