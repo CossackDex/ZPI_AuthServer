@@ -2,6 +2,7 @@
 import os
 
 from flask import Flask
+from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash
 
@@ -19,6 +20,7 @@ def create_app():
 
     # Init Plugs
     db.init_app(app)
+    cors = CORS(app, resources={r"/*": {"origins": "*"}})
     # Talisman(app)  # FIXME place to enable https only connection
     from .models import User  # TODO Why i need to import this piece of shit
 
