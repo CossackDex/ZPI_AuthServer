@@ -20,7 +20,7 @@ def create_app():
 
     # Init Plugs
     db.init_app(app)
-    cors = CORS(app, resources={r"/*": {"origins": "*"}})
+    cors = CORS(app, resources={r"/*": {"origins": "*"}})  # line that probably add functionality to connect to react
     # Talisman(app)  # FIXME place to enable https only connection
     from .models import User  # TODO Why i need to import this piece of shit
 
