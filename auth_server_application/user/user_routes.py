@@ -8,12 +8,6 @@ from ..models import User, db
 
 user_bp = Blueprint('user_bp', __name__)
 
-
-# @user_bp.route('/dashboard/login', methods=['GET', 'POST'])
-# def login():
-#     return False  # FIXME
-#
-#
 @user_bp.route('/dashboard/signup', methods=['POST'])
 def signup():
     data = request.get_json()
@@ -34,12 +28,20 @@ def user_options(user):
     user_data = dict(username=user.username, email=user.email)
     return jsonify(user_data), 201
 
-#
-# @user_bp.route('/dashboard/user/change_password', methods=['GET', 'POST'])
-# def user_change_pass():
-#     return False  # FIXME
-#
-#
-# @user_bp.route('/dashboard/user/change_email', methods=['GET', 'POST'])
-# def user_change_email():
-#     return False  # FIXME
+
+@user_bp.route('/dashboard/user/change_password', methods=['PUT'])
+@login_required
+def user_change_pass(user):
+    data = request.get_json()
+    user.password_hash = generate_password_hash(data['new_password'], method='sha256')
+    db.session.commit()
+    return jsonify(message="User = {} password has been updated".format(user.username)), 200
+
+
+@user_bp.route('/dashboard/user/change_email', methods=['PUT'])
+@login_required
+def user_change_email(user):
+    data = request.get_json()
+    user.email = data['new_email']
+    db.session.commit()
+    return jsonify(message="User = {} email has been updated".format(user.username)), 200
