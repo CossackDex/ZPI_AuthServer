@@ -47,5 +47,8 @@ def user_change_pass(user):
 def user_change_email(user):
     data = request.get_json()
     user.email = data['new_email']
-    db.session.commit()
+    try:
+        db.session.commit()
+    except IntegrityError as e:
+        return jsonify(message="provided email already exist", error_message=str(e.orig)), 403
     return jsonify(message="User = {} email has been updated".format(user.username)), 200
