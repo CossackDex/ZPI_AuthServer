@@ -1,6 +1,6 @@
-from uuid import uuid4
 
 from flask import Blueprint, request, jsonify
+from sqlalchemy.exc import IntegrityError
 from werkzeug.security import generate_password_hash
 
 from ..decorators import login_required
@@ -8,17 +8,21 @@ from ..models import User, db
 
 user_bp = Blueprint('user_bp', __name__)
 
+
 @user_bp.route('/dashboard/signup', methods=['POST'])
 def signup():
     data = request.get_json()
 
-    new_user_data = dict(public_id=str(uuid4()),
-                         username=data['username'],
-                         email=data['email'],
-                         password_hash=generate_password_hash(data['password'], method='sha256'))
+    new_user_data = dict(
+        username=data['username'],
+        email=data['email'],
+        password_hash=generate_password_hash(data['password'], method='sha256'))
     new_user = User(**new_user_data)
     db.session.add(new_user)
-    db.session.commit()
+    try:
+        db.session.commit()
+    except IntegrityError:
+        return jsonify(message="user with provided credentials already exist"), 403
     return jsonify(message="user - {} has been created".format(data['username'])), 201
 
 
