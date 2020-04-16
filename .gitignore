@@ -254,3 +254,7 @@ yarn-error.log*
 server.crt
 server.key
 server.csr
+
+.history
+
+.vscode
