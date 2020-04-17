@@ -28,7 +28,6 @@ class RegForm extends React.Component {
 
   onSubmit = (formValues) => {
     this.props.signUp(formValues)
-
   }
 
   render() {

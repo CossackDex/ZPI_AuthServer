@@ -1,19 +1,19 @@
-import flask from "../apis/flask"
+import flask from "../apis/flask";
 import {
   SIGN_IN,
   SIGN_OUT,
   SIGN_UP,
   GET_USER,
-  CHANGE_PASS,
-  CHANGE_MAIL,
-  A_GET_USERS,
-  A_GET_USER,
-  A_CHANGE_PASS,
-  A_FORCE_PASS,
-  A_CHANGE_MAIL,
-  A_FORCE_MAIL,
-  S_POWERS,
-  S_POWER
+  // CHANGE_PASS,
+  // CHANGE_MAIL,
+  // A_GET_USERS,
+  // A_GET_USER,
+  // A_CHANGE_PASS,
+  // A_FORCE_PASS,
+  // A_CHANGE_MAIL,
+  // A_FORCE_MAIL,
+  // S_POWERS,
+  // S_POWER,
 } from "./types";
 
 export const signIn = () => {
@@ -28,24 +28,25 @@ export const signOut = () => {
   };
 };
 
-export const signUp = formValues => async dispatch => {
+export const signUp = (formValues) => async (dispatch) => {
   flask.post("/dashboard/signup", formValues);
 
   dispatch({ type: SIGN_UP, payload: Response.data });
 };
 
-// export const getUser = () => async dispatch => {
-//   const a = {username: 'qwe'}
-//   const response = await axios.get("http://127.0.0.1:5000/dashboard/user", a, {
-//     auth: {
-//       Username: 'qwe',
-//       Password: 'qwe'
-//     }
-//   });
+//Łączy się z serwerem, ale jeszcze trzeba ustawić zmienne wartości dla 'a'
+export const getUser = () => async (dispatch) => {
+  var a = {
+    auth: {
+      username: "qwe",
+      password: "qwe",
+    },
+  };
+  const response = await flask.get("/dashboard/user", a);
 
-//   dispatch({ type: GET_USER, payload: response.data })
-//   console.log(response.data)
-// }
+  dispatch({ type: GET_USER, payload: response.data });
+  console.log(response);
+};
 
 // export const changePass = () => {
 
