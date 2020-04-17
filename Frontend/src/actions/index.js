@@ -1,4 +1,5 @@
 import flask from "../apis/flask";
+import history from "../history";
 import {
   SIGN_IN,
   SIGN_OUT,
@@ -32,6 +33,7 @@ export const signUp = (formValues) => async (dispatch) => {
   flask.post("/dashboard/signup", formValues);
 
   dispatch({ type: SIGN_UP, payload: Response.data });
+  history.push('/dashboard')
 };
 
 //Łączy się z serwerem, ale jeszcze trzeba ustawić zmienne wartości dla 'a'
