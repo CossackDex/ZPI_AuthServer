@@ -19,7 +19,7 @@ class RegForm extends React.Component {
 
   renderInput = ({input, placeholder, className, meta, type}) => {
     return (
-      <div className={"field" + meta.error && meta.touched ? 'error' :''}> {/*Miejsce na klasy Semantic UI*/}
+      <div className={className + "field" + meta.error && meta.touched ? 'error' :''}> {/*Miejsce na klasy Semantic UI*/}
         <input {...input} placeholder={placeholder} type={type} autoComplete="off"/>
         {this.renderError(meta)}
       </div>
@@ -44,21 +44,21 @@ class RegForm extends React.Component {
           type="text"
           placeholder="Username"
           className="error"
-        />
+        />{/*Miejsce na klasy Semantic UI*/}
           <Field
           name="email"
           component={this.renderInput}
           type="text"
           placeholder="E-mail"
           className=""
-        />
+        />{/*Miejsce na klasy Semantic UI*/}
         <Field
           name="password"
           component={this.renderInput}
           type="password"
           placeholder="Password"
           className=""
-        />
+        />{/*Miejsce na klasy Semantic UI*/}
 
         <button type="submit">Sign up</button>
       </Form>
@@ -77,7 +77,7 @@ const validate = formValues => {
   const errors = {};
 
   if (!formValues.username) {
-    errors.username = "You must enter a Username"
+    errors.username = "You must enter a username"
   }
 
   if (!formValues.email) {
@@ -90,7 +90,7 @@ const validate = formValues => {
 }
 
 const formWrapped = reduxForm({
-  form: "reg",
+  form: "signup",
   validate
 })(RegForm)
 

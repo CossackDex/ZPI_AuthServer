@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import { Route, Link } from "react-router-dom";
+import { Field, reduxForm } from "redux-form";
+import { connect } from "react-redux";
+import {signIn} from "../actions";
 import {
   Button,
   Divider,
@@ -12,39 +15,56 @@ import {
   Icon,
 } from "semantic-ui-react";
 
-export default class LogForm extends Component {
-  state = { open: false };
+ class LogForm extends Component {
 
-  show = () => this.setState({ open: true });
-  handleConfirm = () => this.setState({ open: false });
-  handleCancel = () => this.setState({ open: false });
+  renderError = ({error, touched}) => {
+    if (touched && error) {
+      return (
+        <div className="ui error message">
+          <div className="header">{error}</div>
+        </div>
+      )
+    }
+  }
+
+  renderInput = ({input, placeholder, className, meta, type}) => {
+    return (
+      <div className={className + "field" + meta.error && meta.touched ? 'error' :''}> {/*Miejsce na klasy Semantic UI*/}
+        <input {...input} placeholder={placeholder} type={type} autoComplete="off"/>
+        {this.renderError(meta)}
+      </div>
+    )
+  }
+
+  onSubmit = (formValues) => {
+    this.props.signIn(formValues)
+  }
 
   render() {
     return (
       <Segment placeholder>
-        <Form>
+        <Form onSubmit={this.props.handleSubmit(this.onSubmit)} error>
           <Header as="h3" textAlign="center">
             Let's login!
           </Header>
-          <Form.Input
-            icon="user"
-            iconPosition="left"
-            //label="Username"
+          <Field
+            name="username"
+            component={this.renderInput}
+            type="text"
             placeholder="Username"
-          />
-          <Form.Input
-            icon="lock"
-            iconPosition="left"
-            //label="Password"
+            className="error"
+          /> {/*Miejsce na klasy Semantic UI*/}
+          <Field
+            name="password"
+            component={this.renderInput}
             type="password"
             placeholder="Password"
-          />
+            className=""
+          /> {/*Miejsce na klasy Semantic UI*/}
 
           <Grid centered>
             <GridColumn width={5}>
-              <Link to="/logged">
-                <Button content="Login" color="teal" />
-              </Link>
+                <Button content="Login" type="submit" color="teal" />
             </GridColumn>
             <GridColumn width={5}>
               <Modal
@@ -66,7 +86,7 @@ export default class LogForm extends Component {
                   />
                 </Modal.Content>
                 <Modal.Actions>
-                  <Button color="gray">
+                  <Button color="blue">
                     <Icon name="remove" /> Cancel
                   </Button>
                   <Button color="green">
@@ -96,3 +116,23 @@ export default class LogForm extends Component {
     );
   }
 }
+
+const validate = formValues => {
+  const errors = {};
+
+  if (!formValues.username) {
+    errors.username = "You must enter a username"
+  }
+
+  if (!formValues.password) {
+    errors.password = "You must enter a password"
+  }
+  return errors;
+}
+
+const formWrapped = reduxForm({
+  form: "signin",
+  validate
+})(LogForm)
+
+export default connect(null, {signIn})(formWrapped);

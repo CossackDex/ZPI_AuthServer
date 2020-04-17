@@ -17,10 +17,15 @@ import {
   // S_POWER,
 } from "./types";
 
-export const signIn = () => {
-  return {
-    type: SIGN_IN,
-  };
+//Koniecznie trzeba zrobić reduktor dodający te dane do Store'a
+export const signIn = ({username, password}) => async (dispatch) => {
+  const a = {auth: {username: username, password: password}};
+  const response = await flask.get("/dashboard/user", a);
+  console.log(response.data)
+  if (response) {
+    dispatch({ type: GET_USER, payload: response.data });
+    history.push('/dashboard') //Później warto dodać info o błędnej nazwie lub haśle
+  }
 };
 
 export const signOut = () => {
@@ -30,24 +35,18 @@ export const signOut = () => {
 };
 
 export const signUp = (formValues) => async (dispatch) => {
-  flask.post("/dashboard/signup", formValues);
-
+  const f = { ...formValues, role: 0}
+  flask.post("/dashboard/signup", f);
+  if (Response) {
   dispatch({ type: SIGN_UP, payload: Response.data });
   history.push('/dashboard')
+  }
 };
 
-//Łączy się z serwerem, ale jeszcze trzeba ustawić zmienne wartości dla 'a'
-export const getUser = () => async (dispatch) => {
-  var a = {
-    auth: {
-      username: "qwe",
-      password: "qwe",
-    },
-  };
+export const getUser = (data) => async (dispatch) => {
+  var a = {auth: data};
   const response = await flask.get("/dashboard/user", a);
-
   dispatch({ type: GET_USER, payload: response.data });
-  console.log(response);
 };
 
 // export const changePass = () => {
