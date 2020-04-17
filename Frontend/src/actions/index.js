@@ -1,4 +1,4 @@
-import axios from "axios";
+import flask from "../apis/flask"
 import {
   SIGN_IN,
   SIGN_OUT,
@@ -29,7 +29,7 @@ export const signOut = () => {
 };
 
 export const signUp = formValues => async dispatch => {
-  axios.post("http://127.0.0.1:5000/dashboard/signup", formValues);
+  flask.post("/dashboard/signup", formValues);
 
   dispatch({ type: SIGN_UP, payload: Response.data });
 };
