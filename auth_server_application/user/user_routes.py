@@ -52,3 +52,10 @@ def user_change_email(user):
     except IntegrityError as e:
         return jsonify(message="provided email already exist", error_message=str(e.orig)), 403
     return jsonify(message="User = {} email has been updated".format(user.username)), 200
+
+@user_bp.route('/dashboard/user/self_delete', methods=['GET'])
+@login_required
+def user_delete_account(user):
+    db.session.delete(user)
+    db.session.commit()
+    return jsonify(message="user - {} has been deleted".format(user.username)), 200

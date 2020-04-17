@@ -21,7 +21,7 @@ admin_bp = Blueprint('admin_bp', __name__, template_folder='templates', static_f
 #         if is_superadmin:
 #             return 'AccessGranted'  # Fixme
 #         else:
-#             return 'Access Denied'  # FIXMe
+#             return 'Access Denied'  # FIXme
 #
 #     return decorator
 #
