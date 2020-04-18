@@ -29,7 +29,7 @@ def signup():
 @user_bp.route('/dashboard/user', methods=['GET'])
 @login_required
 def user_options(user):
-    user_data = dict(username=user.username, email=user.email)
+    user_data = dict(username=user.username, email=user.email, role=user.role, id=user.id, created_date=user.created_date, superuser=user.superuser)
     return jsonify(user_data), 201
 
 
