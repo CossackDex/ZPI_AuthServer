@@ -6,22 +6,13 @@ export default class Navbar extends Component {
   state = { activeItem: "Admin Dashboard" };
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name });
-  handleLoggingClick = (e, { path }) => this.setState({ path: path });
-
+  
   render() {
     const { activeItem } = this.state;
 
     return (
       <Menu pointing secondary>
-        {/* <Route path="/dashboard">
-          <Link to="/dashboard/admin">
-            <Menu.Item
-              name="My account"
-              active={activeItem === "My account"}
-              onClick={this.handleItemClick}
-            />
-          </Link>
-        </Route> */}
+        
         <Route exact path="/dashboard/admin">
           {/* <Link to="/login"> */}
             <Menu.Item
@@ -31,16 +22,24 @@ export default class Navbar extends Component {
               // onClick={this.handleItemClick}
             />
           {/* </Link> */}
+          <Route path="/dashboard/user">
+          <Link to="/dashboard/user">
+            <Menu.Item
+              name="My account"
+              active={activeItem === "My account"}
+              onClick={this.handleItemClick}
+            />
+          </Link>
+        </Route>
         </Route>
         <Menu.Menu position="right">
-          <Route path="/dashboard">
-            <Link to="/login">
+          <Route path="/dashboard/admin">
+            <Link to="/dashboard/login">
               <Menu.Item name="logout" onClick={this.handleItemClick} />
             </Link>
           </Route>
-
-          <Route exact path="/dashboard">
-            <Link to="/login">
+          <Route path="/dashboard/user">
+            <Link to="/dashboard/login">
               <Menu.Item name="logout" onClick={this.handleItemClick} />
             </Link>
           </Route>
