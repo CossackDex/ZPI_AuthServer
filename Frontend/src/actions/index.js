@@ -40,6 +40,7 @@ export const signUp = (formValues) => async (dispatch) => {
   await flask.post("/dashboard/signup", f);
   const a = {auth: {username: formValues.username, password: formValues.password}};
   const response = await flask.get("/dashboard/user", a);
+  console.log(response.data)
   if (response) {
   dispatch({ type: SIGN_UP, payload: response.data });
   history.push('/dashboard')
