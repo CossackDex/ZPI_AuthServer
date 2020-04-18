@@ -1,66 +1,95 @@
 import flask from "../apis/flask";
 import history from "../history";
+import { useSelector } from 'react-redux'
 import {
   SIGN_IN,
   SIGN_OUT,
   SIGN_UP,
   GET_USER,
-  // CHANGE_PASS,
-  // CHANGE_MAIL,
+  CHANGE_PASS,
+  CHANGE_MAIL,
+  DELETE_ME,
   // A_GET_USERS,
   // A_GET_USER,
   // A_CHANGE_PASS,
   // A_FORCE_PASS,
   // A_CHANGE_MAIL,
   // A_FORCE_MAIL,
+  // A_DELETE_USER,
   // S_POWERS,
   // S_POWER,
 } from "./types";
 
-
-export const signIn = ({username, password}) => async (dispatch) => {
-  const a = {auth: {username: username, password: password}};
+export const signIn = ({ username, password }) => async dispatch => {
+  const a = { auth: { username: username, password: password } };
   const response = await flask.get("/dashboard/user", a);
-
   if (response) {
-    dispatch({ type: SIGN_IN, payload: response.data });
-    history.push('/dashboard') //Później warto dodać info o błędnej nazwie lub haśle
+    const p = {...response.data, password: password }
+    dispatch({ type: SIGN_IN, payload: p })
+    history.push("/dashboard"); //Później warto dodać info o błędnej nazwie lub haśle
   }
 };
 
 export const signOut = () => {
-  history.push('/login')
+  history.push("/login");
   return {
     type: SIGN_OUT,
   };
 };
 
-export const signUp = (formValues) => async (dispatch) => {
-  const f = { ...formValues, role: 0}
+export const signUp = formValues => async dispatch => {
+  const f = { ...formValues, role: 0 };
   await flask.post("/dashboard/signup", f);
-  const a = {auth: {username: formValues.username, password: formValues.password}};
+  const a = {
+    auth: { username: formValues.username, password: formValues.password },
+  };
   const response = await flask.get("/dashboard/user", a);
-  console.log(response.data)
   if (response) {
-  dispatch({ type: SIGN_UP, payload: response.data });
-  history.push('/dashboard')
+    const p = {...response.data, password: formValues.password }
+    dispatch({ type: SIGN_UP, payload: p });
+    history.push("/dashboard");
   }
 };
 
-//Nie wiem jak to wykorzystać do reużywalności kodu
-export const getUser = ({username, password}) => async (dispatch) => {
-  const a = {auth: {username: username, password: password}};
+export const getUser = ({ username, password }) => async dispatch => {
+  const a = { auth: { username: username, password: password } };
   const response = await flask.get("/dashboard/user", a);
-  return response
+  dispatch({ type: GET_USER, payload: response.data });
 };
 
-// export const changePass = () => {
+export const changePass = ({ newpass }) => async dispatch => {
+  const currentUser = useSelector(state => state.sign.username);
+  const currentPass = useSelector(state => state.sign.password);
+  const a = { auth: { username: currentUser, password: currentPass } };
+  const npass = { new_password: newpass };
+  await flask.put("/dashboard/user/change_password", npass, a);
+  history.push("/login");
+  return {
+    type: CHANGE_PASS,
+  };
+};
 
-// }
+export const changeMail = ({ newmail }) => async dispatch => {
+  const currentUser = useSelector(state => state.sign.username);
+  const currentPass = useSelector(state => state.sign.password);
+  const a = { auth: { username: currentUser, password: currentPass } };
+  const nmail = { new_mail: newmail };
+  await flask.put("/dashboard/user/change_email", nmail, a);
+  const response = await flask.get("/dashboard/user", a);
+  dispatch({ type: CHANGE_MAIL, payload: response.data });
+  history.push("/dashboard");
+};
 
-// export const changeMail = () => {
-
-// }
+export const deleteMe = () => async dispatch => {
+  const currentUser = useSelector(state => state.sign.username);
+  const currentPass = useSelector(state => state.sign.password);
+  const a = { auth: { username: currentUser, password: currentPass } };
+  await flask.get("/dashboard/user/self_delete", a);
+  history.push("/register");
+  return {
+    type: DELETE_ME,
+  };
+};
 
 // export const aGetUsers = () => async dispatch => {
 //   const response = await axios.post("http://127.0.0.1:5000/dashboard/admin/get_all_users")

@@ -1,4 +1,12 @@
-import { SIGN_IN, SIGN_OUT, SIGN_UP } from "../actions/types";
+import {
+  SIGN_IN,
+  SIGN_OUT,
+  SIGN_UP,
+  GET_USER,
+  CHANGE_PASS,
+  CHANGE_MAIL,
+  DELETE_ME,
+} from "../actions/types";
 
 const INITIAL_STATE = {
   role: -1,
@@ -11,6 +19,7 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         role: action.payload.role,
         username: action.payload.username,
+        password: action.payload.password,
         mail: action.payload.mail,
         created_date: action.payload.created_date,
         superuser: action.payload.superuser,
@@ -21,12 +30,29 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         role: action.payload.role,
         username: action.payload.username,
+        password: action.payload.password,
         mail: action.payload.mail,
         created_date: action.payload.created_date,
         superuser: action.payload.superuser,
       };
     case SIGN_OUT:
       return INITIAL_STATE;
+
+    case GET_USER:
+      return state;
+
+    case CHANGE_PASS:
+      return INITIAL_STATE;
+
+    case CHANGE_MAIL:
+      return {
+        ...state,
+        mail: action.payload.mail,
+      };
+
+    case DELETE_ME:
+      return INITIAL_STATE;
+
     default:
       return state;
   }
