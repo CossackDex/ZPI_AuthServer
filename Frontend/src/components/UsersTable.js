@@ -5,10 +5,10 @@ export default class UsersTable extends Component {
   row = (user) => {
     return (
       <Table.Row>
-        <Table.Cell width={1}>{user.id}</Table.Cell>
-        <Table.Cell width={2}>{user.username}</Table.Cell>
-        <Table.Cell width={3}>{user.email}</Table.Cell>
-        <Table.Cell width={2}>{user.role}</Table.Cell>
+        <Table.Cell width={1}>{user.id || ''}</Table.Cell>
+        <Table.Cell width={2}>{user.username || ''}</Table.Cell>
+        <Table.Cell width={3}>{user.email || ''}</Table.Cell>
+        <Table.Cell width={2}>{user.role || ''}</Table.Cell>
         <Table.Cell width={1}>
           <Button
             floated="left"
@@ -53,7 +53,7 @@ export default class UsersTable extends Component {
             <Table.HeaderCell>Username</Table.HeaderCell>
             <Table.HeaderCell>mail</Table.HeaderCell>
             <Table.HeaderCell>Role</Table.HeaderCell>
-            <Table.HeaderCell>Edit</Table.HeaderCell>
+            <Table.HeaderCell></Table.HeaderCell>
           </Table.Row>
         </Table.Header>
         <Table.Body>

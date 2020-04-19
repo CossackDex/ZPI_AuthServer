@@ -29,10 +29,10 @@ export default class ChangeSiteBar extends Component {
         secondary
         totalPages={pages}
         activePage={activePage}
+        // onPageChange={(e,d) => this.handlePaginationChange(e, d, {name: "Kasi"})}
         onPageChange={this.handlePaginationChange}
-      />
 
-      
+      />
     );
   }
 }
