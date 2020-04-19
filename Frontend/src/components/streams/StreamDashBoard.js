@@ -32,7 +32,7 @@ const users_list = [
     username: "Aston5",
     email: "l@mail.com",
     role: "r",
-  }
+  },
 ];
 export default class StreamDashBoard extends Component {
   state = { activePage: 1, usersPerPage: 2, users_list: users_list };
@@ -43,43 +43,33 @@ export default class StreamDashBoard extends Component {
 
   handlePaginationChange = (e, { activePage }) => this.setState({ activePage });
   render() {
-    const { activePage, usersPerPage, users_list} = this.state;
+    const { activePage, usersPerPage, users_list } = this.state;
     return (
       <Grid>
-                <GridRow></GridRow>1         
+        <GridRow></GridRow>
         <GridRow>
-                    <GridColumn width={1}></GridColumn>
-                    
+          <GridColumn width={1}></GridColumn>
           <GridColumn width={14}>
-                        
             <UsersTable
               users_list={users_list}
               activePage={activePage}
               usersPerPage={usersPerPage}
               countPages={this.countPages(users_list)}
             ></UsersTable>
-                      
           </GridColumn>
-                    <GridColumn width={1}></GridColumn>
-                  
+           <GridColumn width={1}></GridColumn>
         </GridRow>
-                
         <GridRow>
-                    <GridColumn width={6}></GridColumn>
-                    
+          <GridColumn width={6}></GridColumn>
           <GridColumn>
-                        
             <ChangeSiteBar
               activePage={activePage}
               pages={this.countPages(users_list)} //podmienic na dane z serwera
               handlePaginationChange={this.handlePaginationChange}
             ></ChangeSiteBar>
-                      
           </GridColumn>
-                    {/* <GridColumn width={5}></GridColumn> */}
-                  
+          {/* <GridColumn width={5}></GridColumn> */}
         </GridRow>
-              
       </Grid>
     );
   }
