@@ -60,3 +60,21 @@ def user_delete_account(user):
     db.session.delete(user)
     db.session.commit()
     return jsonify(message="user - {} has been deleted".format(user.username)), 200
+
+
+@user_bp.route('dasboard/user/force_password_change', methods=['POST'])
+def user_force_password_change():
+    data = request.get_json()
+    username, email, password = data['username'], data['email'], data['password']
+    user_username = User.query.filter_by(username=username).first()
+    user_email = User.query.filter_by(email=email).first()
+    if user_username is user_email:
+        user_username.password_hash = generate_password_hash(password['password'], method='sha256')
+        user_username.force_password_change = False
+        try:
+            db.session.commit()
+        except IntegrityError as e:
+            return jsonify(message="db error", error_message=str(e.orig)), 403
+        return jsonify(message='password for user - {} has been changed'.format(user_username.username))
+    else:
+        return jsonify(message='provided username and email not connected with same account'), 401

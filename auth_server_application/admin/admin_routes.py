@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request
 from sqlalchemy.exc import IntegrityError
 
 from ..decorators import login_required, required_admin, required_superadmin
@@ -34,17 +34,78 @@ def admin_user_give_privileges(username):
     return jsonify(message='privileges granted'), 200
 
 
+@admin_bp.route('/dashboard/admin/user/<username>/change_email', methods=['POST'])
+@login_required
+@required_admin
 def admin_user_change_email(username):
-    return False
+    data = request.get_json()
+    new_email = data['new_email']
+    user = User.query.filter_by(username=username).first()
+    if not user:
+        return jsonify(message="No account with provided username - {}".format(username)), 409
+    user.email = new_email
+    try:
+        db.session.commit()
+    except IntegrityError as e:
+        return jsonify(message="db error", error_message=str(e.orig)), 400
+    return jsonify(message='email for user - {} has been changed'.format(user.username)), 200
 
 
+@admin_bp.route('/dashboard/admin/user/<username>/delete_account', methods=['GET'])
+@login_required
+@required_admin
 def admin_user_delete_account(username):
-    return False
+    user = User.query.filter_by(username=username).first()
+    if not user:
+        return jsonify(message="No account with provided username - {}".format(username)), 409
+    db.session.delete(user)
+    try:
+        db.session.commit()
+    except IntegrityError as e:
+        return jsonify(message="db error", error_message=str(e.orig)), 400
+    return jsonify(message='user - {} has been deleted'.format(user.username)), 200
 
 
+@admin_bp.route('/dashboard/admin/user/<username>/ban_user', methods=['GET'])
+@login_required
+@required_admin
 def admin_user_ban_user(username):
-    return False
+    user = User.query.filter_by(username=username).first()
+    if not user:
+        return jsonify(message="No account with provided username - {}".format(username)), 409
+    user.is_banned = True
+    try:
+        db.session.commit()
+    except IntegrityError as e:
+        return jsonify(message="db error", error_message=str(e.orig)), 400
+    return jsonify(message='user - {} is banned now'.format(user.username)), 200
 
 
+@admin_bp.route('/dashboard/admin/user/<username>/unban_user', methods=['GET'])
+@login_required
+@required_admin
 def admin_user_unban_user(username):
-    return False
+    user = User.query.filter_by(username=username).first()
+    if not user:
+        return jsonify(message="No account with provided username - {}".format(username)), 409
+    user.is_banned = False
+    try:
+        db.session.commit()
+    except IntegrityError as e:
+        return jsonify(message="db error", error_message=str(e.orig)), 400
+    return jsonify(message='user - {} is unbanned now'.format(user.username)), 200
+
+
+@admin_bp.route('/dashboard/admin/user/<username>/force_password_change', methods=['GET'])
+@login_required
+@required_admin
+def admin_user_force_password_change(username):
+    user = User.query.filter_by(username=username).first()
+    if not user:
+        return jsonify(message="No account with provided username - {}".format(username)), 409
+    user.force_password_change = True
+    try:
+        db.session.commit()
+    except IntegrityError as e:
+        return jsonify(message="db error", error_message=str(e.orig)), 400
+    return jsonify(message='user - {} now need to change password before login'.format(user.username)), 200
