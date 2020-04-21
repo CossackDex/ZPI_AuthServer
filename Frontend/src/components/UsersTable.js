@@ -1,21 +1,28 @@
 import React, { Component } from "react";
-import { Table, Button, Icon, Modal } from "semantic-ui-react";
+import { Table, Button, Icon, Modal, TableCell } from "semantic-ui-react";
 import ModalScreen from "./ModalScreen";
+import AdminButtons from "./AdminButtons";
+
 
 export default class UsersTable extends Component {
+
+ 
   //  fn zwracjąca Table.row na postawie jednego uzytkoniwak (dicta)
   row = (user) => {
     return (
       <Table.Row>
         <Table.Cell width={1}>{user.id || ""}</Table.Cell>
         <Table.Cell width={2}>{user.username || ""}</Table.Cell>
-        <Table.Cell width={3}>{user.email || ""}</Table.Cell>
+        <Table.Cell width={2}>{user.email || ""}</Table.Cell>
         <Table.Cell width={2}>{user.role || ""}</Table.Cell>
-        <Table.Cell width={1}>
+        <Table.Cell width={2}>
           <ModalScreen
           username={user.username}
           useremail={user.email}
           role={user.role}></ModalScreen>
+        </Table.Cell>
+        <Table.Cell width={1}>
+          <AdminButtons></AdminButtons>
         </Table.Cell>
       </Table.Row>
     );
@@ -48,8 +55,9 @@ export default class UsersTable extends Component {
           <Table.Row>
             <Table.HeaderCell>Id</Table.HeaderCell>
             <Table.HeaderCell>Username</Table.HeaderCell>
-            <Table.HeaderCell>mail</Table.HeaderCell>
-            <Table.HeaderCell>Role</Table.HeaderCell>
+            <Table.HeaderCell>E-mail</Table.HeaderCell>
+            <Table.HeaderCell>Create Time</Table.HeaderCell>
+            <Table.HeaderCell></Table.HeaderCell>
             <Table.HeaderCell></Table.HeaderCell>
           </Table.Row>
         </Table.Header>

@@ -29,33 +29,43 @@ export default class EditWindow extends Component{
       </Table.Header>
       <Table.Body>
         <Table.Row>
-          <Table.Cell width={5}>
+          <Table.Cell width={10}>
             <b>E-mail</b>
           </Table.Cell>
           <Table.Cell width={5}>{useremail}</Table.Cell>
           <Table.Cell width={5}>
-            <Input placeholder="E-mail" />
+            <Input placeholder="New E-mail" />
           </Table.Cell>
         </Table.Row>
         <Table.Row>
           <Table.Cell width={10}>
-            <b>Password</b>
+            <b>Old Password</b>
           </Table.Cell>
           <Table.Cell width={5}>**********</Table.Cell>
           <Table.Cell width={5}>
-            <Input placeholder="Password" />
+            <Input placeholder="Old Password" />
           </Table.Cell>
         </Table.Row>
-        <Route path="/dashboard/admin">
-          <Table.Row>
-            <Table.Cell width={10}>
-              <b>Role</b>
-            </Table.Cell>
-            <Table.Cell width={5}>{role}</Table.Cell>
-            <Table.Cell width={5}>
-              <Input placeholder="Role" />
-            </Table.Cell>
-          </Table.Row>
+        <Table.Row>
+          <Table.Cell width={10}>
+            <b>New Password</b>
+          </Table.Cell>
+          <Table.Cell width={5}>**********</Table.Cell>
+          <Table.Cell width={5}>
+            <Input placeholder=" New Password" />
+          </Table.Cell>
+        </Table.Row>
+        <Route exact path="/dashboard/user">
+        <Table.Row>
+          <Table.Cell width={10}>
+            <b>Confirm password</b>
+          </Table.Cell>
+          <Table.Cell width={5}></Table.Cell>
+          {/* <Table.Cell width={5}>**********</Table.Cell> */}
+          <Table.Cell width={5}>
+            <Input placeholder="Confirm Password" />
+          </Table.Cell>
+        </Table.Row>
         </Route>
       </Table.Body>
       <Route exact path="/dashboard/user">

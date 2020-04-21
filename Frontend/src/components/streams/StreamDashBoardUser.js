@@ -15,7 +15,7 @@ import {
 
 const user = {
   username: "Nutella",
-  email: "nutella@gmail.com",
+  useremail: "nutella@gmail.com",
   password: "********",
 };
 
@@ -29,7 +29,7 @@ export default class StreamDashBoardUser extends Component {
   // handleDropdownClick = (e, d) => this.setState({usersPerPage: d.value});
 
   render() {
-    const { user } = this.state;
+    // const { user } = this.state;
     return (
       <Grid>
         <GridRow></GridRow>
@@ -40,49 +40,12 @@ export default class StreamDashBoardUser extends Component {
         </GridRow> */}
         <GridRow>
           <GridColumn width={4}></GridColumn>
-          <GridColumn>
-            <EditWindow></EditWindow>
-            {/* <Table color="teal">
-              <Table.Header>
-                <Table.Row>
-                  <Table.HeaderCell> <Header as='h3'>Dexon98</Header></Table.HeaderCell>
-                  <Table.HeaderCell></Table.HeaderCell>
-                  <Table.HeaderCell></Table.HeaderCell>
-                </Table.Row>
-              </Table.Header>
-              <Table.Body>
-                <Table.Row>
-                  <Table.Cell width={10}><b>E-mail</b></Table.Cell>
-                  <Table.Cell width={5}>E-mail</Table.Cell>
-                  <Table.Cell width={5}><Input placeholder="E-mail" /></Table.Cell>
-                </Table.Row>
-                <Table.Row>
-                  <Table.Cell width={10}>
-                    <b>Password</b>
-                  </Table.Cell>
-                  <Table.Cell width={5}>**********</Table.Cell>
-                  <Table.Cell width={5}>
-                    <Input placeholder="Password" />
-                  </Table.Cell>
-                </Table.Row>
-              </Table.Body>
-              <TableFooter>
-                <Table.Row>
-                  <Table.HeaderCell colSpan="3">
-                    <Button
-                      floated="right"
-                      icon
-                      labelPosition="left"
-                      color="teal"
-                      size="small"
-                    >
-                      <Icon name="edit" />
-                       Save changes
-                    </Button>
-                  </Table.HeaderCell>
-                </Table.Row>
-              </TableFooter>
-            </Table> */}
+          <GridColumn width={8}>
+          <EditWindow
+          username={user.username}
+          useremail={user.useremail}
+          ></EditWindow>
+            {/* <EditWindow></EditWindow> */}
           </GridColumn>
           {/* <GridColumn width={5}></GridColumn> */}
         </GridRow>

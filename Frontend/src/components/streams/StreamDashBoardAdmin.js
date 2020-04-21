@@ -3,12 +3,12 @@ import UsersTable from "../UsersTable";
 import ChangeSiteBar from "../ChangeSiteBar";
 import { Grid, GridRow, GridColumn, Dropdown } from "semantic-ui-react";
 
-const users_list = [1,2,3,4,5,6,7,8,9,10,11,12,15,17].map(x => 
+const users_list = [1,2,3,4,5,6,7,8,9,10,11,12,15,16].map(x => 
   ({
     id: x,
     username: "Aston" + x,
     email: "mail" + x + "@mail.com",
-    role: "role" + x
+    role: x + ".04.2020 " + x*2 +":"+ x*3+":00"
   })
 )
 
