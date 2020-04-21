@@ -90,24 +90,24 @@ const users_list = [1,2,3,4,5,6,7,8,9,10,11,12,15,16].map(x =>
 
 const numberOptions = [
   {
-    key: 3,
-    text: 3,
-    value: 3,
-  },
-  {
-    key: 5,
-    text: 5,
-    value: 5,
-  },
-  {
     key: 10,
     text: 10,
     value: 10,
   },
   {
-    key: 15,
-    text: 15,
-    value: 15,
+    key: 20,
+    text: 20,
+    value: 20,
+  },
+  {
+    key: 50,
+    text: 50,
+    value: 50,
+  },
+  {
+    key: 10000000,
+    text: "All",
+    value: 10000000,
   },
 ];
 
