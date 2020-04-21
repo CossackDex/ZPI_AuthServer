@@ -62,7 +62,7 @@ def user_delete_account(user):
     return jsonify(message="user - {} has been deleted".format(user.username)), 200
 
 
-@user_bp.route('dasboard/user/force_password_change', methods=['POST'])
+@user_bp.route('/dasboard/user/force_password_change', methods=['POST'])
 def user_force_password_change():
     data = request.get_json()
     username, email, password = data['username'], data['email'], data['password']
