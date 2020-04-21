@@ -5,7 +5,8 @@ import history from "../history";
 import StreamTest from "./streams/StreamTest";
 import StreamLogin from "./streams/StreamLogin";
 import StreamReg from "./streams/StreamReg";
-import StreamDashboard from "./streams/StreamDashBoard";
+import StreamDashboardAdmin from "./streams/StreamDashBoardAdmin";
+import StreamDashBoardUser from "./streams/StreamDashBoardUser";
 import Navbar from "./Navbar";
 
 
@@ -21,7 +22,8 @@ const App = () => {
           <Route path="/" exact component={StreamTest} />
           <Route path="/dashboard/login" exact component={StreamLogin} />
           <Route path="/dashboard/signup" exact component={StreamReg} />
-          <Route path="/dashboard/admin" exact component={StreamDashboard} />
+          <Route path="/dashboard/admin" exact component={StreamDashboardAdmin} />
+          <Route path="/dashboard/user" exact component={StreamDashBoardUser} />
 
         </Switch>
       </Router>

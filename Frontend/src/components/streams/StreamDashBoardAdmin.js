@@ -111,7 +111,7 @@ const numberOptions = [
   },
 ];
 
-export default class StreamDashBoard extends Component {
+export default class StreamDashBoardAdmin extends Component {
   state = {
     activePage: 1,
     usersPerPage: numberOptions[0].value,

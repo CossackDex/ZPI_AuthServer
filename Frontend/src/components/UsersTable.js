@@ -1,25 +1,21 @@
 import React, { Component } from "react";
-import { Table, Button, Icon, Tab } from "semantic-ui-react";
+import { Table, Button, Icon, Modal } from "semantic-ui-react";
+import ModalScreen from "./ModalScreen";
+
 export default class UsersTable extends Component {
   //  fn zwracjąca Table.row na postawie jednego uzytkoniwak (dicta)
   row = (user) => {
     return (
       <Table.Row>
-        <Table.Cell width={1}>{user.id || ''}</Table.Cell>
-        <Table.Cell width={2}>{user.username || ''}</Table.Cell>
-        <Table.Cell width={3}>{user.email || ''}</Table.Cell>
-        <Table.Cell width={2}>{user.role || ''}</Table.Cell>
+        <Table.Cell width={1}>{user.id || ""}</Table.Cell>
+        <Table.Cell width={2}>{user.username || ""}</Table.Cell>
+        <Table.Cell width={3}>{user.email || ""}</Table.Cell>
+        <Table.Cell width={2}>{user.role || ""}</Table.Cell>
         <Table.Cell width={1}>
-          <Button
-            floated="left"
-            icon
-            labelPosition="left"
-            color="teal"
-            size="small"
-          >
-            <Icon name="edit" />
-             Edit
-          </Button>
+          <ModalScreen
+          username={user.username}
+          useremail={user.email}
+          role={user.role}></ModalScreen>
         </Table.Cell>
       </Table.Row>
     );
@@ -44,6 +40,7 @@ export default class UsersTable extends Component {
 
   render() {
     const { users_list, activePage, usersPerPage, countPages } = this.props;
+
     return (
       // <Table celled compact definition color="teal" key="teal">
       <Table color="teal">

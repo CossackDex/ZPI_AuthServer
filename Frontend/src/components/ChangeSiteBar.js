@@ -1,10 +1,6 @@
 import React, { Component } from "react";
 import {
-  Menu,
-  Pagination,
-  Button,
-  Icon,
-  PaginationItem,
+  Pagination 
 } from "semantic-ui-react";
 
 export default class ChangeSiteBar extends Component {
