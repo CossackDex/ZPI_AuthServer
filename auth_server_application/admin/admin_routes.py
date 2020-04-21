@@ -1,65 +1,50 @@
-from flask import Blueprint
+from flask import Blueprint, jsonify
+from sqlalchemy.exc import IntegrityError
+
+from ..decorators import login_required, required_admin, required_superadmin
+from ..models import User, db
 
 admin_bp = Blueprint('admin_bp', __name__, template_folder='templates', static_folder='static')
 
-# def required_admin(f):
-#     @wraps(f)
-#     def decorator(*args, **kwargs):
-#         is_admin = False  # FIXME querry correct data
-#         if is_admin:
-#             return 'Access Granted'  # FIXME
-#         else:
-#             return 'Access Denied'  # FIXME
-#
-#     return decorator  # FIXME Why i need to return this
-#
-#
-# def required_superadmin(f):
-#     @wraps(f)
-#     def decorator(*args, **kwargs):
-#         is_superadmin = False  # FIXME querry correct data
-#         if is_superadmin:
-#             return 'AccessGranted'  # Fixme
-#         else:
-#             return 'Access Denied'  # FIXme
-#
-#     return decorator
-#
-#
-# @required_admin
-# @admin_bp.route('/dashboard/admin', methods=['GET'])
-# def admin():
-#     return False  # FIXME
-#
-#
-# @required_admin
-# @admin_bp.route('/dashboard/admin/user/<int:pk>', methods=['GET'])  # FIXME 100% that's not working url bug
-# def admin_user_data():
-#     return False  # FIXME
-#
-#
-# @required_admin
-# @admin_bp.route('/dashboard/admin/user/<int:pk>/ban',
-#                 methods=['GET', 'POST'])  # FIXME 100% that url is not working properly
-# def admin_user_ban():
-#     return False  # FIXME
-#
-#
-# @required_admin
-# @admin_bp.route('/dashboard/admin/user/<int:pk>/give_privileges',
-#                 methods=['GET', 'POST'])  # FIXME 100% that url is not working properly
-# def admin_user_give_privileges():
-#     return False  # FIXME
-#
-#
-# @required_admin
-# @admin_bp.route('/dashboard/admin/service', methods=['GET', 'POST'])
-# def admin_service_list():
-#     return False  # FIXME
-#
-#
-# @required_admin
-# @admin_bp.route('/dashboard/admin/service/<str:name>',
-#                 methods=['GET', 'PUT', 'DELETE'])  # FIXME 100% that url is not working
-# def admin_service():
-#     return False  # FIXME
+
+@admin_bp.route('/dashboard/admin', methods=['GET'])
+@login_required
+@required_admin
+def admin(user=None):
+    users = User.query.filter(User.role.isnot(True)).all()
+    for user in users:
+        user_dict = {user.id: {'username': user.username, 'email': user.email, 'role': user.role,
+                               'created_date': user.created_date, 'is_banned': user.is_banned}}
+    return jsonify(users_list=user_dict), 200
+
+
+@admin_bp.route('/dashboard/admin/user/<username>/give_privileges', methods=['GET'])
+@login_required
+@required_admin
+@required_superadmin
+def admin_user_give_privileges(username):
+    user = User.query.filter_by(username=username).first()
+    if not user:
+        return jsonify(message="No account with provided username - {}".format(username)), 409
+    user.role = True
+    try:
+        db.session.commit()
+    except IntegrityError as e:
+        return jsonify(message="user with provided credentials already exist", error_message=str(e.orig)), 400
+    return jsonify(message='privileges granted'), 200
+
+
+def admin_user_change_email(username):
+    return False
+
+
+def admin_user_delete_account(username):
+    return False
+
+
+def admin_user_ban_user(username):
+    return False
+
+
+def admin_user_unban_user(username):
+    return False

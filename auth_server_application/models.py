@@ -11,6 +11,7 @@ class User(db.Model):
     role = db.Column(db.Boolean, nullable=False, default=False)
     superuser = db.Column(db.Boolean, nullable=False, default=False)
     password_hash = db.Column(db.String(256), nullable=False, unique=False)
+    is_banned = db.Column(db.String(256), nullable=False, unique=False, default=False)
     created_date = db.Column(db.DateTime, default=datetime.now)
 
     def __init__(self, role=False, superuser=False, **kwargs):

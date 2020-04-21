@@ -1,4 +1,3 @@
-
 from flask import Blueprint, request, jsonify
 from sqlalchemy.exc import IntegrityError
 from werkzeug.security import generate_password_hash
@@ -29,7 +28,8 @@ def signup():
 @user_bp.route('/dashboard/user', methods=['GET'])
 @login_required
 def user_options(user):
-    user_data = dict(username=user.username, email=user.email, role=user.role, id=user.id, created_date=user.created_date, superuser=user.superuser)
+    user_data = dict(username=user.username, email=user.email, role=user.role, id=user.id,
+                     created_date=user.created_date, superuser=user.superuser, is_banned=user.is_banned)
     return jsonify(user_data), 201
 
 
@@ -52,6 +52,7 @@ def user_change_email(user):
     except IntegrityError as e:
         return jsonify(message="provided email already exist", error_message=str(e.orig)), 403
     return jsonify(message="User = {} email has been updated".format(user.username)), 200
+
 
 @user_bp.route('/dashboard/user/self_delete', methods=['GET'])
 @login_required
