@@ -24,3 +24,10 @@ class User(db.Model):
 
     def __repr__(self):
         return '<User {}>'.format(self.username)
+
+
+class Service(db.Model):
+    __tablename__ = "Services list"
+    id = db.Column(db.Integer, primary_key=True)
+    service_name = db.Column(db.String(80), unique=True, nullable=False)
+    creator_id = db.Column(db.Integer, 99)

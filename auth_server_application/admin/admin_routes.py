@@ -1,25 +1,26 @@
 from flask import Blueprint, jsonify, request
 from sqlalchemy.exc import IntegrityError
 
-from ..decorators import login_required, required_admin, required_superadmin
+from ..decorators import required_login, required_admin, required_superadmin
 from ..models import User, db
 
 admin_bp = Blueprint('admin_bp', __name__, template_folder='templates', static_folder='static')
 
 
 @admin_bp.route('/dashboard/admin', methods=['GET'])
-@login_required
+@required_login
 @required_admin
 def admin(user=None):
     users = User.query.filter(User.role.isnot(True)).all()
     for user in users:
-        user_dict = {user.id: {'username': user.username, 'email': user.email, 'role': user.role,
-                               'created_date': user.created_date, 'is_banned': user.is_banned}}
+        user_dict = {user.id: {'username': user.username, 'email': user.email,
+                               'created_date': user.created_date, 'is_banned': user.is_banned,
+                               'force_password_change': user.force_password_change}}
     return jsonify(users_list=user_dict), 200
 
 
 @admin_bp.route('/dashboard/admin/user/<username>/give_privileges', methods=['GET'])
-@login_required
+@required_login
 @required_admin
 @required_superadmin
 def admin_user_give_privileges(username):
@@ -35,7 +36,7 @@ def admin_user_give_privileges(username):
 
 
 @admin_bp.route('/dashboard/admin/user/<username>/change_email', methods=['POST'])
-@login_required
+@required_login
 @required_admin
 def admin_user_change_email(username):
     data = request.get_json()
@@ -52,7 +53,7 @@ def admin_user_change_email(username):
 
 
 @admin_bp.route('/dashboard/admin/user/<username>/delete_account', methods=['GET'])
-@login_required
+@required_login
 @required_admin
 def admin_user_delete_account(username):
     user = User.query.filter_by(username=username).first()
@@ -67,7 +68,7 @@ def admin_user_delete_account(username):
 
 
 @admin_bp.route('/dashboard/admin/user/<username>/ban_user', methods=['GET'])
-@login_required
+@required_login
 @required_admin
 def admin_user_ban_user(username):
     user = User.query.filter_by(username=username).first()
@@ -82,7 +83,7 @@ def admin_user_ban_user(username):
 
 
 @admin_bp.route('/dashboard/admin/user/<username>/unban_user', methods=['GET'])
-@login_required
+@required_login
 @required_admin
 def admin_user_unban_user(username):
     user = User.query.filter_by(username=username).first()
@@ -97,7 +98,7 @@ def admin_user_unban_user(username):
 
 
 @admin_bp.route('/dashboard/admin/user/<username>/force_password_change', methods=['GET'])
-@login_required
+@required_login
 @required_admin
 def admin_user_force_password_change(username):
     user = User.query.filter_by(username=username).first()

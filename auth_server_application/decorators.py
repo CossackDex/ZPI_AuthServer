@@ -6,7 +6,7 @@ from werkzeug.security import check_password_hash
 from .models import User
 
 
-def login_required(f):
+def required_login(f):
     @wraps(f)
     def decorated(*args, **kwargs):
         auth = request.authorization

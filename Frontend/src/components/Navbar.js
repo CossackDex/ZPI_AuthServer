@@ -1,65 +1,48 @@
-import React, { Component } from "react";
-import { Menu } from "semantic-ui-react";
-import { Route, Link } from "react-router-dom";
-import { Field, reduxForm } from "redux-form";
-import { connect } from "react-redux";
-import { signIn, signOut } from "../actions"
-import history from "../history"
+import {Component} from "react";
+import {Menu} from "semantic-ui-react";
+import {Link, Route} from "react-router-dom";
 
-class Navbar extends Component {
+export default class Navbar extends Component {
+    state = {activeItem: "home"};
 
+    handleItemClick = (e, {name}) => this.setState({activeItem: name});
+    handleLoggingClick = (e, {path}) => this.setState({path: path});
 
+    render() {
+        const {activeItem} = this.state;
 
-  renderName = () => {
-    if (this.props.role === -1) {
-      return "SIGN IN"
+        return (
+            < Menu
+        pointing
+        secondary >
+        < Menu.Item
+        name = "home"
+        active = {activeItem === "home"
     }
-    return "SIGN OUT"
-  }
-
-
-  onSubmit = () => {
-    if (this.props.role === -1) {
-      history.push('/login');
-    }
-    else {
-    this.props.signOut()
-    }
-  }
-
-
-
-  render() {
-
-    return (
-      <Menu pointing secondary>
-        <Menu.Item
-          name="home"
+        onClick = {this.handleItemClick}
         />
-        <Menu.Item
-          name="help"
-        />
-        <Menu.Item
-          name={this.renderName()}
-          onClick={this.onSubmit}
+        < Menu.Item
+        name = "help"
+        active = {activeItem === "help"
+    }
+        onClick = {this.handleItemClick}
         />
 
-        <Menu.Menu position="right">
-          <Route exact path="/logged">
-            <Link to="/login">
-              <Menu.Item name="logout" onClick={this.handleItemClick} />
-            </Link>
-          </Route>
-        </Menu.Menu>
-      </Menu>
-    );
-  }
+        < Menu.Menu
+        position = "right" >
+            < Route
+        exact
+        path = "/logged" >
+            < Link
+        to = "/login" >
+            < Menu.Item
+        name = "logout"
+        onClick = {this.handleItemClick}
+        />
+        < /Link>
+        < /Route>
+        < /Menu.Menu>
+        < /Menu>
+    )
+    }
 }
-
-const mapStateToProps = state => {
-  return {
-    role: state.sign.role
-  }
-}
-
-export default connect(mapStateToProps, {signIn, signOut})(Navbar);

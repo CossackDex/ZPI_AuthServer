@@ -2,14 +2,14 @@ import os
 
 from flask import Blueprint, jsonify
 
-from ..decorators import login_required
+from ..decorators import required_login
 from ..utilities import create_jwt
 
 jwt_rest_bp = Blueprint('jwt_rest_bp', __name__)
 
 
 @jwt_rest_bp.route('/api/v1/user', methods=['POST'])
-@login_required
+@required_login
 def jwt(user):
     username = user.username
     email = user.email
