@@ -11,14 +11,11 @@ import {
 
 export default class ServiceNameButton extends Component {
   // state = {
-  //   banned: false,
-  //   color: "grey",
-  //   name: "Unbaned",
-  //   open: false,
+  //   name: {name}
   // };
 
   // handleOnClick = () => {
-  //   this.setState({ banned: !this.state.banned });
+  //   this.setState({ name: "new name"}); // do przerobienia
   // };
  
   render() {
