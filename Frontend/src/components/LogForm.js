@@ -42,7 +42,7 @@ export default class LogForm extends Component {
 
           <Grid centered>
             <GridColumn width={5}>
-              <Link to="/dashboard/admin">
+              <Link to="/dashboard/admin/users">
                 <Button content="Login" color="teal" /> {/* przenosi na dashboard, dla admina */}
               </Link>
               {/* <Link to="/dashboard/user">

@@ -11,10 +11,10 @@ export default class UsersTable extends Component {
   row = (user) => {
     return (
       <Table.Row>
-        <Table.Cell width={1}>{user.id || ""}</Table.Cell>
-        <Table.Cell width={2}>{user.username || ""}</Table.Cell>
-        <Table.Cell width={2}>{user.email || ""}</Table.Cell>
-        <Table.Cell width={2}>{user.role || ""}</Table.Cell>
+        <Table.Cell width={1}>{user.id}</Table.Cell>
+        <Table.Cell width={2}>{user.username}</Table.Cell>
+        <Table.Cell width={2}>{user.email}</Table.Cell>
+        <Table.Cell width={2}>{user.role}</Table.Cell>
         <Table.Cell width={2}>
           <ModalScreen
           username={user.username}

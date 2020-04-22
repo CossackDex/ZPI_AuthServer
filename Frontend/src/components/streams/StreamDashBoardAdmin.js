@@ -12,82 +12,6 @@ const users_list = [1,2,3,4,5,6,7,8,9,10,11,12,15,16,17,18,19,20,21,22,25,26].ma
   })
 )
 
-
-// const users_list = [
-//   {
-//     id: 1,
-//     username: "Aston",
-//     email: "mail@mail.com",
-//     role: "q",
-//   },
-//   {
-//     id: 2,
-//     username: "Aston2",
-//     email: "l@mail.coml@mail.com",
-//     role: "w",
-//   },
-//   {
-//     id: 3,
-//     username: "Aston3",
-//     email: "mail",
-//     role: "e",
-//   },
-//   {
-//     id: 4,
-//     username: "Aston4",
-//     email: "l@mail.com",
-//     role: "r",
-//   },
-//   {
-//     id: 5,
-//     username: "Aston5",
-//     email: "l@mail.com",
-//     role: "r",
-//   },
-//   {
-//     id: 6,
-//     username: "Aston",
-//     email: "mail@mail.com",
-//     role: "q",
-//   },
-//   {
-//     id: 7,
-//     username: "Aston2",
-//     email: "l@mail.coml@mail.com",
-//     role: "w",
-//   },
-//   {
-//     id: 8,
-//     username: "Aston3",
-//     email: "mail",
-//     role: "e",
-//   },
-//   {
-//     id: 9,
-//     username: "Aston4",
-//     email: "l@mail.com",
-//     role: "r",
-//   },
-//   {
-//     id: 10,
-//     username: "Aston5",
-//     email: "l@mail.com",
-//     role: "r",
-//   },
-//   {
-//     id: 11,
-//     username: "Aston5",
-//     email: "l@mail.com",
-//     role: "r",
-//   },
-//   {
-//     id: 12,
-//     username: "Aston5",
-//     email: "l@mail.com",
-//     role: "r",
-//   }
-// ];
-
 const numberOptions = [
   {
     key: 10,
@@ -111,7 +35,7 @@ const numberOptions = [
   },
 ];
 
-export default class StreamDashBoardAdmin extends Component {
+export default class DashBoard extends Component {
   state = {
     activePage: 1,
     usersPerPage: numberOptions[0].value,
@@ -126,7 +50,7 @@ export default class StreamDashBoardAdmin extends Component {
   handlePaginationChange = (e, { activePage }) => this.setState({ activePage });
 
   handleDropdownClick = (e, { value }) =>
-    this.setState({ usersPerPage: value });
+    this.setState({ usersPerPage: value, activePage: 1 });
   // handleDropdownClick = (e, d) => this.setState({usersPerPage: d.value});
 
   render() {

@@ -60,16 +60,14 @@ export default class EditWindow extends Component {
                 <Input placeholder="Old Password" />
               </Table.Cell>
             </Table.Row>
-          </Route>
-          <Table.Row>
-            <Table.Cell width={7}>
-              <b>New Password</b>
-            </Table.Cell>
-            <Table.Cell collapsing>
-              <Input placeholder=" New Password" />
-            </Table.Cell>
-          </Table.Row>
-          <Route exact path="/dashboard/user">
+            <Table.Row>
+              <Table.Cell width={7}>
+                <b>New Password</b>
+              </Table.Cell>
+              <Table.Cell collapsing>
+                <Input placeholder=" New Password" />
+              </Table.Cell>
+            </Table.Row>
             <Table.Row>
               <Table.Cell width={7}>
                 <b>Confirm password</b>
