@@ -110,3 +110,10 @@ def admin_user_force_password_change(username):
     except IntegrityError as e:
         return jsonify(message="db error", error_message=str(e.orig)), 400
     return jsonify(message='user - {} now need to change password before login'.format(user.username)), 200
+
+
+@admin_bp.route(('/dashboard/admin/services'), methods=['GET', 'POST'])
+@required_login
+@required_admin
+def admin_service():
+    request.url()

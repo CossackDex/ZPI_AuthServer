@@ -14,6 +14,7 @@ class User(db.Model):
     is_banned = db.Column(db.Boolean, nullable=False, unique=False, default=False)
     force_password_change = db.Column(db.Boolean, nullable=False, unique=False, default=False)
     created_date = db.Column(db.DateTime, default=datetime.now)
+    services = db.relationship('Services', backref='service', lazy=True)
 
     def __init__(self, role=False, superuser=False, **kwargs):
         self.username = kwargs['username']
@@ -26,8 +27,15 @@ class User(db.Model):
         return '<User {}>'.format(self.username)
 
 
-class Service(db.Model):
+class Services(db.Model):
     __tablename__ = "Services list"
     id = db.Column(db.Integer, primary_key=True)
     service_name = db.Column(db.String(80), unique=True, nullable=False)
-    creator_id = db.Column(db.Integer, 99)
+    creator_id = db.Column(db.Integer, db.ForeignKey('User.id'), nullable=False)
+    connection_ip = db.Column(db.String(250), unique=False, nullable=False)
+    created_date = db.Column(db.DateTime, default=datetime.now)
+
+    def __init__(self, **kwargs):
+        self.service_name = kwargs['service_name']
+        self.creator_id = kwargs['user'].id
+        self.connection_ip = kwargs['connection_ip']
