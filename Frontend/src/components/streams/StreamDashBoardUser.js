@@ -39,8 +39,8 @@ export default class StreamDashBoardUser extends Component {
           <GridColumn width={1}></GridColumn>
         </GridRow> */}
         <GridRow>
-          <GridColumn width={4}></GridColumn>
-          <GridColumn width={8}>
+          <GridColumn width={5}></GridColumn>
+          <GridColumn width={6}>
           <EditWindow
           username={user.username}
           useremail={user.useremail}

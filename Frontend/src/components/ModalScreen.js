@@ -30,7 +30,7 @@ const { username, useremail, role} = this.props;
              Edit
           </Button>
     {/* <Button >Blurring</Button> */}
-        <Modal size="small" dimmer={dimmer} open={open} onClose={this.close}>
+        <Modal size="mini" dimmer={dimmer} open={open} onClose={this.close}>
           {/* <Modal.Header>Select a Photo</Modal.Header> */}
           <EditWindow
           username={username}

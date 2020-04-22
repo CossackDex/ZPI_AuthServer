@@ -9,60 +9,72 @@ import {
   Input,
   TableFooter,
   Header,
+  Confirm,
 } from "semantic-ui-react";
 import { Route } from "react-router-dom";
 
 export default class EditWindow extends Component {
+  state = {
+    open: false,
+  };
+
+  open = () => this.setState({ open: true });
+  close = () => this.setState({ open: false });
+
   render() {
     const { username, useremail, role } = this.props;
     return (
       <Table color="teal">
         <Table.Header>
           <Table.Row>
-            <Table.HeaderCell>
-              {" "}
-              <Header as="h4">{username}</Header>
+            <Table.HeaderCell colSpan="2">
+              <p></p>
+              <p></p>
+              <p>
+                <Header as="h4">Username: {username}</Header>
+              </p>
+              {/* </Table.HeaderCell>
+            <Table.HeaderCell> */}
+              <p>
+                <Header as="h4">E-mail: {useremail}</Header>
+              </p>
+              <p></p>
             </Table.HeaderCell>
-            <Table.HeaderCell></Table.HeaderCell>
-            <Table.HeaderCell></Table.HeaderCell>
           </Table.Row>
         </Table.Header>
         <Table.Body>
           <Table.Row>
-            <Table.Cell width={10}>
+            <Table.Cell width={7}>
               <b>E-mail</b>
             </Table.Cell>
-            <Table.Cell width={5}>{useremail}</Table.Cell>
-            <Table.Cell width={5}>
+            <Table.Cell collapsing>
               <Input placeholder="New E-mail" />
             </Table.Cell>
           </Table.Row>
+          <Route exact path="/dashboard/user">
+            <Table.Row>
+              <Table.Cell width={7}>
+                <b>Old Password</b>
+              </Table.Cell>
+              <Table.Cell collapsing>
+                <Input placeholder="Old Password" />
+              </Table.Cell>
+            </Table.Row>
+          </Route>
           <Table.Row>
-            <Table.Cell width={10}>
-              <b>Old Password</b>
-            </Table.Cell>
-            <Table.Cell width={5}>**********</Table.Cell>
-            <Table.Cell width={5}>
-              <Input placeholder="Old Password" />
-            </Table.Cell>
-          </Table.Row>
-          <Table.Row>
-            <Table.Cell width={10}>
+            <Table.Cell width={7}>
               <b>New Password</b>
             </Table.Cell>
-            <Table.Cell width={5}>**********</Table.Cell>
-            <Table.Cell width={5}>
+            <Table.Cell collapsing>
               <Input placeholder=" New Password" />
             </Table.Cell>
           </Table.Row>
           <Route exact path="/dashboard/user">
             <Table.Row>
-              <Table.Cell width={10}>
+              <Table.Cell width={7}>
                 <b>Confirm password</b>
               </Table.Cell>
-              <Table.Cell width={5}></Table.Cell>
-              {/* <Table.Cell width={5}>**********</Table.Cell> */}
-              <Table.Cell width={5}>
+              <Table.Cell collapsing>
                 <Input placeholder="Confirm Password" />
               </Table.Cell>
             </Table.Row>
@@ -72,6 +84,24 @@ export default class EditWindow extends Component {
           <TableFooter>
             <Table.Row>
               <Table.HeaderCell colSpan="3">
+                <Button
+                  inverted
+                  floated="left"
+                  icon
+                  labelPosition="left"
+                  color="red"
+                  size="small"
+                  onClick={this.open}
+                >
+                  <Icon name="user delete" />
+                   Delete
+                </Button>
+                <Confirm
+                  size="mini"
+                  open={this.state.open}
+                  onCancel={this.close}
+                  onConfirm={this.close}
+                />
                 <Button
                   floated="right"
                   icon

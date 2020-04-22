@@ -66,28 +66,6 @@ export default class UsersTable extends Component {
             this.rows(users_list, countPages, activePage, usersPerPage)}
         </Table.Body>
       </Table>
-
-      // <Table color="teal">
-      //   {/* <Table.Header fullWidth> */}
-      //   <Table.Header>
-      //     <Table.Row>
-      //                 <Table.HeaderCell>Id</Table.HeaderCell>
-      //                 <Table.HeaderCell>Username</Table.HeaderCell>
-      //                 <Table.HeaderCell>E-mail</Table.HeaderCell>
-      //                 <Table.HeaderCell>Role</Table.HeaderCell>
-      //       <Table.HeaderCell>Edit</Table.HeaderCell>
-      //     </Table.Row>
-      //   </Table.Header>
-      //   <Table.Body>
-      //     {/* tu wyświtlam wiersze które odpowiadają numerowi strony activePage */}
-      //     {users_list[0] && this.rows(users_list, countPages, activePage, usersPerPage)}
-      //   </Table.Body>
-      //   <Table.Footer fullWidth>
-      //     <Table.Row>
-      //         <Table.HeaderCell colSpan="5"></Table.HeaderCell>
-      //     </Table.Row>
-      //   </Table.Footer>
-      // </Table>
     );
   }
 }

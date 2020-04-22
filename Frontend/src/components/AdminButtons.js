@@ -22,7 +22,7 @@ export default class UsersTable extends Component {
   open = () => this.setState({ open: true });
   close = () => this.setState({ open: false });
   render() {
-    const { activeItem, color, banned } = this.state;
+    const { banned } = this.state;
 
     return (
       <Button.Group>
@@ -37,6 +37,7 @@ export default class UsersTable extends Component {
           Delete
         </Button>
         <Confirm
+          size="mini"
           open={this.state.open}
           onCancel={this.close}
           onConfirm={this.close}
