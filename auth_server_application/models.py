@@ -39,3 +39,7 @@ class Services(db.Model):
         self.service_name = kwargs['service_name']
         self.creator_id = kwargs['user'].id
         self.connection_ip = kwargs['connection_ip']
+
+    def __repr__(self):
+        return {'id': self.id, 'service_name': self.service_name, 'creator_id': self.creator_id,
+                'connection_ip': self.connection_ip, 'created_date': self.created_date}

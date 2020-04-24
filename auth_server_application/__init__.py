@@ -9,7 +9,6 @@ from werkzeug.security import generate_password_hash
 # 3-rd part imports
 
 # Globally accessible libraries
-
 db = SQLAlchemy()
 
 
@@ -29,17 +28,17 @@ def create_app():
         from .admin import admin_routes
         from .rest_jwt import jwt_rest_routes
         from .user import user_routes
-        # Can i put this here
-        # from .models import User
+        from .services import services_routes
 
         # Register Blueprints
         app.register_blueprint(admin_routes.admin_bp)
         app.register_blueprint(jwt_rest_routes.jwt_rest_bp)
         app.register_blueprint(user_routes.user_bp)
+        app.register_blueprint(services_routes.services_bp)
         db.drop_all()
         db.create_all()
 
-        # create superuser
+        # Create superuser
         username = os.environ.get('superuser_nickname')
         email = os.environ.get('superuser_email')
         role = True

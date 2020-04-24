@@ -1,8 +1,8 @@
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify
 from sqlalchemy.exc import IntegrityError
 
-from ..decorators import required_login, required_admin, required_superadmin
-from ..models import User, db
+from ..decorators import *
+from ..models import *
 
 admin_bp = Blueprint('admin_bp', __name__, template_folder='templates', static_folder='static')
 
@@ -111,10 +111,3 @@ def admin_user_force_password_change(username):
     except IntegrityError as e:
         return jsonify(message="db error", error_message=str(e.orig)), 400
     return jsonify(message='user - {} now need to change password before login'.format(user.username)), 200
-
-
-@admin_bp.route(('/dashboard/admin/services'), methods=['GET', 'POST'])
-@required_login
-@required_admin
-def admin_service():
-    return False
