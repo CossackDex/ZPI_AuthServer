@@ -20,9 +20,7 @@ const App = () => {
 
           <Route path="/" exact component={StreamTest} />
           <Route path="/dashboard/login" exact component={StreamLogin} />
-          <Route path="/register" exact component={StreamReg} />
-          {/* <Route path="/dashboard" exact component={StreamDashboard} /> */}
-          
+          <Route path="/dashboard/register" exact component={StreamReg} />
           <Route path="/dashboard/admin/users" exact component={StreamDashboardAdmin} />
           <Route path="/dashboard/admin/services" exact component={StreamDashboardServices}/>
           <Route path="/dashboard/user" exact component={StreamDashBoardUser} />

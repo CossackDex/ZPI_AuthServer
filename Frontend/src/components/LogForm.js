@@ -109,7 +109,7 @@ import {
 
         <Divider horizontal>Or</Divider>
         <Route path="/dashboard/login">
-          <Link to="/register">
+          <Link to="/dashboard/register">
             <Button content="Sign up" icon="signup" size="big" color="black" />
           </Link>
         </Route>
