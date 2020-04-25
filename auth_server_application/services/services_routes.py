@@ -11,7 +11,7 @@ services_bp = Blueprint('services_bp', __name__)
 @required_login
 @required_admin
 def services(user=None):
-    if request.method == 'POST':
+    if request.method is 'POST':
         data = request.get_json()
 
         new_service_data = dict(
@@ -35,7 +35,7 @@ def services(user=None):
 @required_login
 @required_admin
 def service(service_name, user=None):
-    if request.method == 'PUT':
+    if request.method is 'PUT':
         data = request.get_json()
         service_data = Services.query.filter_by(service_name=service_name).first()
         service_data.service_name = data['service_name']
@@ -49,7 +49,7 @@ def service(service_name, user=None):
         return jsonify(message='service - {} has been changed'.format(service_data.service_name))
     elif request.method is 'DELETE':
         service_data = Services.query.filter_by(service_name=service_name).first()
-        if service_name == None:
+        if service_name is None:
             return jsonify(message="service doesn't exist"), 400
         db.session.delete(service_data)
         db.session.commit()
