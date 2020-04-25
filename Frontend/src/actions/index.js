@@ -72,19 +72,16 @@ export const changePass = ({ newpass }) => async dispatch => {
   };
 };
 
-export const changeMail = ({ newmail }) => async dispatch => {
-  const currentUser = useSelector(state => state.sign.username);
-  const currentPass = useSelector(state => state.sign.password);
-  const a = { auth: { username: currentUser, password: currentPass } };
-  const nmail = { new_mail: newmail };
+export const changeMail = (newmail, a) => async dispatch => {
+  console.log(a)
+  const nmail = { new_email: newmail };
   await flask.put("/dashboard/user/change_email", nmail, a);
   const response = await flask.get("/dashboard/user", a);
   dispatch({ type: CHANGE_MAIL, payload: response.data });
-  history.push("/dashboard/user");
+  history.push("/dashboard/login");
 };
 
 export const deleteMe = (currentUser, currentPass) => async dispatch => {
-  console.log('work')
   const a = { auth: { username: currentUser, password: currentPass } };
   await flask.get("/dashboard/user/self_delete", a);
   history.push("/dashboard/register");
