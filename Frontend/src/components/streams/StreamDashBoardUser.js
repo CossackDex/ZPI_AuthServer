@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import EditWindow from "../EditWindow";
+import { connect } from "react-redux";
+import history from "../../history";
 
 import {
   Grid,
@@ -10,16 +12,10 @@ import {
   Icon,
   Input,
   TableFooter,
-  Header
+  Header,
 } from "semantic-ui-react";
 
-const user = {
-  username: "Nutella",
-  useremail: "nutella@gmail.com",
-  password: "********",
-};
-
-export default class StreamDashBoardUser extends Component {
+class StreamDashBoardUser extends Component {
   state = {};
 
   handlePaginationChange = (e, { activePage }) => this.setState({ activePage });
@@ -28,7 +24,14 @@ export default class StreamDashBoardUser extends Component {
     this.setState({ usersPerPage: value });
   // handleDropdownClick = (e, d) => this.setState({usersPerPage: d.value});
 
+  verify = () => {
+    if (this.props.role < 0) {
+     // history.push(/dashboard/register);
+    }
+  };
+
   render() {
+    this.verify();
     // const { user } = this.state;
     return (
       <Grid>
@@ -41,10 +44,7 @@ export default class StreamDashBoardUser extends Component {
         <GridRow>
           <GridColumn width={5}></GridColumn>
           <GridColumn width={6}>
-          <EditWindow
-          username={user.username}
-          useremail={user.useremail}
-          ></EditWindow>
+            <EditWindow></EditWindow>
             {/* <EditWindow></EditWindow> */}
           </GridColumn>
           {/* <GridColumn width={5}></GridColumn> */}
@@ -53,3 +53,11 @@ export default class StreamDashBoardUser extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    role: state.sign.role,
+  };
+};
+
+export default connect(mapStateToProps, {})(StreamDashBoardUser);
