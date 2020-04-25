@@ -14,7 +14,6 @@ class Navbar extends Component {
 
   render() {
     const { activeItem} = this.state;
-    console.log(this.props.role)
     return (
       <Menu pointing secondary>
         <Route path="/dashboard/admin">

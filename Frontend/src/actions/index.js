@@ -47,7 +47,9 @@ export const signUp = formValues => async dispatch => {
   if (response) {
     const p = {...response.data, password: formValues.password }
     dispatch({ type: SIGN_UP, payload: p });
-    history.push("/dashboard");
+    if (response.data.role) {history.push("/dashboard/admin/users");}
+    else {history.push("/dashboard/user");}
+
   }
 };
 
