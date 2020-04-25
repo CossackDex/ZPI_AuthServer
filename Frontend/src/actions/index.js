@@ -1,6 +1,5 @@
 import flask from "../apis/flask";
 import history from "../history";
-import { useSelector } from 'react-redux'
 import {
   SIGN_IN,
   SIGN_OUT,
@@ -60,20 +59,14 @@ export const getUser = ({ username, password }) => async dispatch => {
   dispatch({ type: GET_USER, payload: response.data });
 };
 
-export const changePass = ({ newpass }) => async dispatch => {
-  const currentUser = useSelector(state => state.sign.username);
-  const currentPass = useSelector(state => state.sign.password);
-  const a = { auth: { username: currentUser, password: currentPass } };
+export const changePass = (newpass, a) => async dispatch => {
   const npass = { new_password: newpass };
   await flask.put("/dashboard/user/change_password", npass, a);
+  dispatch({ type: CHANGE_PASS });
   history.push("/dashboard/login");
-  return {
-    type: CHANGE_PASS,
-  };
 };
 
 export const changeMail = (newmail, a) => async dispatch => {
-  console.log(a)
   const nmail = { new_email: newmail };
   await flask.put("/dashboard/user/change_email", nmail, a);
   const response = await flask.get("/dashboard/user", a);

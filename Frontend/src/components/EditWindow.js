@@ -41,15 +41,27 @@ class EditWindow extends Component {
   };
 
   onDelete = () => {
-    console.log(this.props.username)
     this.props.deleteMe(this.props.username, this.props.password);
   };
 
   onSubmit = (formValues) => {
-    console.log(this.props.username)
-    const a = { auth: { username: this.props.username, password: this.props.password } };
-    this.props.changeMail(formValues.newmail, a);
-  };
+    console.log(formValues)
+    const a = {auth: { username: this.props.username, password: this.props.password }};
+    if (formValues.newmail && !formValues.oldpass) {
+      this.props.changeMail(formValues.newmail, a);
+    }
+    else if (!formValues.newmail && formValues.oldpass && formValues.newpass && formValues.confirmpass && formValues.oldpass === this.props.password && formValues.newpass === formValues.confirmpass) {
+      this.props.changePass(formValues.newpass, a);
+    }
+    else if (formValues.newmail && formValues.oldpass && formValues.newpass && formValues.confirmpass && formValues.oldpass === this.props.password && formValues.newpass === formValues.confirmpass && !(formValues.oldpass === this.props.newpass)) {
+      this.props.changeMail(formValues.newmail, a);
+      this.props.changePass(formValues.newpass, a);
+    }
+    else {
+      return console.log("Nothing to do")
+    }
+
+    };
 
   render() {
     const { username, useremail, role } = this.props;
@@ -95,12 +107,12 @@ class EditWindow extends Component {
                 </Table.Cell>
                 <Table.Cell collapsing>
                   <Field
-                  name="oldpass"
-                  component={this.renderInput}
-                  type="text"
-                  placeholder="Old Password"
-                  className=""
-                />
+                    name="oldpass"
+                    component={this.renderInput}
+                    type="text"
+                    placeholder="Old Password"
+                    className=""
+                  />
                 </Table.Cell>
               </Table.Row>
               <Table.Row>
@@ -109,12 +121,12 @@ class EditWindow extends Component {
                 </Table.Cell>
                 <Table.Cell collapsing>
                   <Field
-                  name="newpass"
-                  component={this.renderInput}
-                  type="text"
-                  placeholder="New Password"
-                  className=""
-                />
+                    name="newpass"
+                    component={this.renderInput}
+                    type="text"
+                    placeholder="New Password"
+                    className=""
+                  />
                 </Table.Cell>
               </Table.Row>
               <Table.Row>
@@ -123,12 +135,12 @@ class EditWindow extends Component {
                 </Table.Cell>
                 <Table.Cell collapsing>
                   <Field
-                  name="confirmpass"
-                  component={this.renderInput}
-                  type="text"
-                  placeholder="Confirm password"
-                  className=""
-                />
+                    name="confirmpass"
+                    component={this.renderInput}
+                    type="text"
+                    placeholder="Confirm password"
+                    className=""
+                  />
                 </Table.Cell>
               </Table.Row>
             </Route>
