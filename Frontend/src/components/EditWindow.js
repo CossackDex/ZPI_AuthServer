@@ -191,6 +191,7 @@ const mapStateToProps = (state) => {
   return {
     username: state.sign.username,
     password: state.sign.password,
+    useremail: state.sign.email
   };
 };
 

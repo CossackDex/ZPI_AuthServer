@@ -17,10 +17,11 @@ export default (state = INITIAL_STATE, action) => {
     case SIGN_UP:
       return {
         ...state,
+        id: action.payload.id,
         role: action.payload.role,
         username: action.payload.username,
         password: action.payload.password,
-        mail: action.payload.mail,
+        email: action.payload.email,
         created_date: action.payload.created_date,
         superuser: action.payload.superuser,
       };
@@ -28,10 +29,11 @@ export default (state = INITIAL_STATE, action) => {
     case SIGN_IN:
       return {
         ...state,
+        id: action.payload.id,
         role: action.payload.role,
         username: action.payload.username,
         password: action.payload.password,
-        mail: action.payload.mail,
+        email: action.payload.email,
         created_date: action.payload.created_date,
         superuser: action.payload.superuser,
       };
