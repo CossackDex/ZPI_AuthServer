@@ -11,7 +11,7 @@ class Navbar extends Component {
   state = { activeItem: "Admin Dashboard"};
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name });
-  
+
   render() {
     const { activeItem} = this.state;
     console.log(this.props.role)
@@ -36,7 +36,7 @@ class Navbar extends Component {
         </Route>
         <Route exact path="/dashboard/user">
           {/* <Link to="/dashboard/user"> */}
-          <Menu.Item name="My account" active="true" />
+          <Menu.Item name="My account" active={true} />
           {/* </Link> */}
         </Route>
 
