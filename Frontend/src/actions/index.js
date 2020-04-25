@@ -26,7 +26,8 @@ export const signIn = ({ username, password }) => async dispatch => {
   if (response) {
     const p = {...response.data, password: password }
     dispatch({ type: SIGN_IN, payload: p })
-    history.push("/dashboard"); //Później warto dodać info o błędnej nazwie lub haśle
+    if (response.data.role) {history.push("/dashboard/admin/users");}
+    else {history.push("/dashboard/user");} //Później warto dodać info o błędnej nazwie lub haśle
   }
 };
 
