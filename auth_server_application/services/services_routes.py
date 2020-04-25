@@ -47,7 +47,7 @@ def service(service_name, user=None):
         except IntegrityError as e:
             return jsonify(message="db error", error_message=str(e.orig)), 403
         return jsonify(message='service - {} has been changed'.format(service_data.service_name))
-    elif request.method is 'DELETE':
+    elif request.method == 'DELETE':
         service_data = Services.query.filter_by(service_name=service_name).first()
         if service_name == None:
             return jsonify(message="service doesn't exist"), 400
