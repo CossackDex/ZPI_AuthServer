@@ -3,7 +3,7 @@ import { Route, Link } from "react-router-dom";
 import { Field, reduxForm } from "redux-form";
 import { connect } from "react-redux";
 import { signUp } from "../actions"
-import { Divider, Form, Segment, Header } from "semantic-ui-react";
+import { Divider, Form, Segment, Header, Button } from "semantic-ui-react";
 
 class RegForm extends React.Component {
 
@@ -60,13 +60,13 @@ class RegForm extends React.Component {
           className=""
         />{/*Miejsce na klasy Semantic UI*/}
 
-        <button type="submit">Sign up</button>
+        <Button color="teal" type="submit">Sign up</Button>
       </Form>
 
       <Divider horizontal>Or</Divider>
-      <Route path="/register">
-        <Link to="/login">
-          <button type="submit">Login</button>
+      <Route path="/dashboard/register">
+        <Link to="/dashboard/login">
+          <Button type="submit">Login</Button>
         </Link>
       </Route>
     </Segment>
