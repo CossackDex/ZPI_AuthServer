@@ -32,7 +32,7 @@ export const signIn = ({ username, password }) => async dispatch => {
 };
 
 export const signOut = () => {
-  history.push("/login");
+  history.push("/dashboard/login");
   return {
     type: SIGN_OUT,
   };
@@ -66,7 +66,7 @@ export const changePass = ({ newpass }) => async dispatch => {
   const a = { auth: { username: currentUser, password: currentPass } };
   const npass = { new_password: newpass };
   await flask.put("/dashboard/user/change_password", npass, a);
-  history.push("/login");
+  history.push("/dashboard/login");
   return {
     type: CHANGE_PASS,
   };
@@ -80,18 +80,15 @@ export const changeMail = ({ newmail }) => async dispatch => {
   await flask.put("/dashboard/user/change_email", nmail, a);
   const response = await flask.get("/dashboard/user", a);
   dispatch({ type: CHANGE_MAIL, payload: response.data });
-  history.push("/dashboard");
+  history.push("/dashboard/user");
 };
 
-export const deleteMe = () => async dispatch => {
-  const currentUser = useSelector(state => state.sign.username);
-  const currentPass = useSelector(state => state.sign.password);
+export const deleteMe = (currentUser, currentPass) => async dispatch => {
+  console.log('work')
   const a = { auth: { username: currentUser, password: currentPass } };
   await flask.get("/dashboard/user/self_delete", a);
-  history.push("/register");
-  return {
-    type: DELETE_ME,
-  };
+  history.push("/dashboard/register");
+  dispatch({ type: DELETE_ME });
 };
 
 // export const aGetUsers = () => async dispatch => {

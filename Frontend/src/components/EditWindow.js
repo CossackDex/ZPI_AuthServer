@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { deleteMe } from "../actions"
+import { connect } from "react-redux";
 import {
   Grid,
   GridRow,
@@ -13,13 +15,17 @@ import {
 } from "semantic-ui-react";
 import { Route } from "react-router-dom";
 
-export default class EditWindow extends Component {
+class EditWindow extends Component {
   state = {
     open: false,
   };
 
   open = () => this.setState({ open: true });
   close = () => this.setState({ open: false });
+
+  onSubmit = () => {
+    this.props.deleteMe(this.props.username, this.props.password)
+  }
 
   render() {
     const { username, useremail, role } = this.props;
@@ -98,7 +104,7 @@ export default class EditWindow extends Component {
                   size="mini"
                   open={this.state.open}
                   onCancel={this.close}
-                  onConfirm={this.close}
+                  onConfirm={this.onSubmit}
                 />
                 <Button
                   floated="right"
@@ -118,3 +124,12 @@ export default class EditWindow extends Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    username: state.sign.username,
+    password: state.sign.password
+  }
+}
+
+export default connect(mapStateToProps, {deleteMe})(EditWindow);
