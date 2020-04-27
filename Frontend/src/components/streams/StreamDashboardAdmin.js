@@ -2,15 +2,10 @@ import React, { Component } from "react";
 import UsersTable from "../UsersTable";
 import ChangeSiteBar from "../ChangeSiteBar";
 import { Grid, GridRow, GridColumn, Dropdown } from "semantic-ui-react";
+import {aGetUsers} from "../actions";
+import { Field, reduxForm } from "redux-form";
+import { connect } from "react-redux";
 
-const users_list = [1,2,3,4,5,6,7,8,9,10,11,12,15,16,17,18,19,20,21,22,25,26].map(x => 
-  ({
-    id: x,
-    username: "User" + x,
-    email: "mail" + x + "@mail.com",
-    role: x + ".04.2020 " + x*2 +":"+ x*3+":00"
-  })
-)
 
 const numberOptions = [
   {
@@ -35,11 +30,18 @@ const numberOptions = [
   },
 ];
 
-export default class DashBoard extends Component {
+class DashBoard extends Component {
+
+  componentDidMount() {
+    const a = {auth: { username: this.props.username, password: this.props.password }};
+    this.props.aGetUsers(a);
+    console.log(this.props.users)
+  }
+
   state = {
     activePage: 1,
     usersPerPage: numberOptions[0].value,
-    users_list: users_list,
+    users_list: this.props.users,
     numberOptions: numberOptions,
   };
 
@@ -52,6 +54,8 @@ export default class DashBoard extends Component {
   handleDropdownClick = (e, { value }) =>
     this.setState({ usersPerPage: value, activePage: 1 });
   // handleDropdownClick = (e, d) => this.setState({usersPerPage: d.value});
+
+
 
   render() {
     const { activePage, usersPerPage, users_list, numberOptions } = this.state;
@@ -92,3 +96,13 @@ export default class DashBoard extends Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  return { users: Object.values(state.users)};
+}
+
+const formWrapped = reduxForm({
+  form: "manage"
+})(DashBoard)
+
+export default connect(mapStateToProps, {aGetUsers})(formWrapped);

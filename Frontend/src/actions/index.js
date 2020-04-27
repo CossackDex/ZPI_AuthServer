@@ -8,7 +8,7 @@ import {
   CHANGE_PASS,
   CHANGE_MAIL,
   DELETE_ME,
-  // A_GET_USERS,
+  A_GET_USERS,
   // A_GET_USER,
   // A_CHANGE_PASS,
   // A_FORCE_PASS,
@@ -82,12 +82,11 @@ export const deleteMe = (currentUser, currentPass) => async dispatch => {
   dispatch({ type: DELETE_ME });
 };
 
-// export const aGetUsers = () => async dispatch => {
-//   const response = await axios.post("http://127.0.0.1:5000/dashboard/admin/get_all_users")
+export const aGetUsers = (a) => async dispatch => {
+  const response = await flask.get("/dashboard/admin", a)
+  dispatch({ type: A_GET_USERS, payload: response.data });
+}
 
-//   dispatch({ type: A_GET_USERS, payload: response.data });
-// }
-// }
 
 // export const aGetUser = () => {
 

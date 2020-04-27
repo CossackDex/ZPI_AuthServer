@@ -45,7 +45,6 @@ class EditWindow extends Component {
   };
 
   onSubmit = (formValues) => {
-    console.log(formValues)
     const a = {auth: { username: this.props.username, password: this.props.password }};
     if (formValues.newmail && !formValues.oldpass) {
       this.props.changeMail(formValues.newmail, a);
