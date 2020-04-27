@@ -8,7 +8,7 @@ import {
   CHANGE_PASS,
   CHANGE_MAIL,
   DELETE_ME,
-  A_GET_USERS,
+  A_GET_USERS
   // A_GET_USER,
   // A_CHANGE_PASS,
   // A_FORCE_PASS,
