@@ -30,7 +30,7 @@ const numberOptions = [
   },
 ];
 
-class DashBoard extends Component {
+class DashBoard extends React.Component {
 
   state = {
     activePage: 1,
@@ -40,17 +40,18 @@ class DashBoard extends Component {
   };
 
   componentDidMount() {
+    if (this.props.username && this.props.password) {
     const a = {auth: { username: this.props.username, password: this.props.password }};
     this.props.aGetUsers(a);
-    this.setState({ users_list: this.props.users });
-    console.log(this.props.users)
+  }
+    if (this.props.users) {
+    const ul = Object.values(this.props.users)
+    console.log(ul)
+    this.setState({ users_list: ul });
+    }
   }
 
-
-
   countPages = (users_list) => {
-    console.log(this.props.users)
-    console.log(this.state.users_list)
     return Math.ceil(users_list.length / this.state.usersPerPage);
   };
 
@@ -63,7 +64,6 @@ class DashBoard extends Component {
 
 
   render() {
-    this.componentDidMount();
     const { activePage, usersPerPage, users_list, numberOptions } = this.state;
     return (
       <Grid>
@@ -103,16 +103,13 @@ class DashBoard extends Component {
   }
 }
 
-// const mapStateToProps = state => {
-//   return { users: Object.values(state.users)};
-// }
 
 const mapStateToProps = state => {
-  return { users: state.users};
+  return {
+    users: state.admin.users_list,
+    username: state.sign.username,
+    password: state.sign.password,
+  };
 }
 
-const formWrapped = reduxForm({
-  form: "manage"
-})(DashBoard)
-
-export default connect(mapStateToProps, {aGetUsers})(formWrapped);
+export default connect(mapStateToProps, {aGetUsers})(DashBoard);

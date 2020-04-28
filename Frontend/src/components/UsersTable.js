@@ -6,7 +6,7 @@ import AdminButtons from "./AdminButtons";
 
 export default class UsersTable extends Component {
 
- 
+
   //  fn zwracjąca Table.row na postawie jednego uzytkoniwak (dicta)
   row = (user) => {
     return (
@@ -14,7 +14,7 @@ export default class UsersTable extends Component {
         <Table.Cell width={1}>{user.id}</Table.Cell>
         <Table.Cell width={2}>{user.username}</Table.Cell>
         <Table.Cell width={2}>{user.email}</Table.Cell>
-        <Table.Cell width={2}>{user.role}</Table.Cell>
+        <Table.Cell width={2}>{user.created_date}</Table.Cell>
         <Table.Cell width={2}>
           <ModalScreen
           username={user.username}

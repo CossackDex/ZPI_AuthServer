@@ -15,6 +15,7 @@ def signup():
     new_user_data = dict(
         username=data['username'],
         email=data['email'],
+        role=1,
         password_hash=generate_password_hash(data['password'], method='sha256'))
     new_user = User(**new_user_data)
     db.session.add(new_user)

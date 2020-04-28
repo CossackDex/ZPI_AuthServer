@@ -14,7 +14,7 @@ def admin(user=None):
     users = User.query.filter(User.superuser.isnot(True)).all()
     all_user_dict = {}
     for user in users:
-        all_user_dict = {user.id: {'username': user.username, 'email': user.email,
+        all_user_dict = {user.id: {'id': user.id, 'username': user.username, 'email': user.email,
                                    'created_date': user.created_date, 'is_banned': user.is_banned,
                                    'force_password_change': user.force_password_change}}
     return jsonify(users_list=all_user_dict), 200

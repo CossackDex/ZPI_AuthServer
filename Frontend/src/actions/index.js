@@ -8,13 +8,13 @@ import {
   CHANGE_PASS,
   CHANGE_MAIL,
   DELETE_ME,
-  A_GET_USERS
+  A_GET_USERS,
   // A_GET_USER,
   // A_CHANGE_PASS,
   // A_FORCE_PASS,
-  // A_CHANGE_MAIL,
+  A_CHANGE_MAIL,
   // A_FORCE_MAIL,
-  // A_DELETE_USER,
+  A_DELETE_USER,
   // S_POWERS,
   // S_POWER,
 } from "./types";
@@ -86,6 +86,11 @@ export const aGetUsers = (a) => async dispatch => {
   dispatch({ type: A_GET_USERS, payload: response.data });
 }
 
+export const aDeleteUser = (a, user) => async dispatch => {
+  // await flask.get("/dashboard/admin/user/"+ +"/delete_account", a);
+  // const response = await flask.get("/dashboard/admin", a)
+  // dispatch({ type: A_GET_USERS, payload: response.data });
+};
 
 // export const aGetUser = () => {
 
@@ -99,9 +104,13 @@ export const aGetUsers = (a) => async dispatch => {
 
 // }
 
-// export const aChangeMail = () => {
+export const aChangeMail = (newmail, a) => async dispatch => {
+    const nmail = { new_email: newmail };
+    await flask.post("/dashboard/user/change_email", nmail, a);
+    const response = await flask.get("/dashboard/admin", a)
+    dispatch({ type: A_GET_USERS, payload: response.data });
 
-// }
+}
 
 // export const aForceMail = () => {
 

@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import {aDeleteUser} from "../actions";
 import {
   Table,
   Button,
@@ -8,12 +10,17 @@ import {
   Confirm,
 } from "semantic-ui-react";
 
-export default class UsersTable extends Component {
+class UsersTable extends Component {
   state = {
     banned: false,
     color: "grey",
     name: "Unbaned",
     open: false,
+  };
+
+    onDelete = () => {
+    const a = {auth: { username: this.props.username, password: this.props.password }};
+    this.props.aDeleteUser(a);
   };
 
   handleOnClick = () => {
@@ -40,9 +47,19 @@ export default class UsersTable extends Component {
           size="mini"
           open={this.state.open}
           onCancel={this.close}
-          onConfirm={this.close}
+          onConfirm={this.onDelete}
         />
       </Button.Group>
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    users: state.admin.users_list,
+    username: state.sign.username,
+    password: state.sign.password,
+  };
+}
+
+export default connect(mapStateToProps, {aDeleteUser})(UsersTable);
