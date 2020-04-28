@@ -22,7 +22,6 @@ import {
 export const signIn = ({ username, password }) => async dispatch => {
   const a = { auth: { username: username, password: password } };
   const response = await flask.get("/dashboard/user", a);
-  console.log(response.data)
   if (response) {
     const p = {...response.data, password: password }
     dispatch({ type: SIGN_IN, payload: p })

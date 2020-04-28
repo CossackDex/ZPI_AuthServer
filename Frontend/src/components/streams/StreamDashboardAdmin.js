@@ -32,20 +32,25 @@ const numberOptions = [
 
 class DashBoard extends Component {
 
-  componentDidMount() {
-    const a = {auth: { username: this.props.username, password: this.props.password }};
-    this.props.aGetUsers(a);
-    console.log(this.props.users)
-  }
-
   state = {
     activePage: 1,
     usersPerPage: numberOptions[0].value,
-    users_list: this.props.users,
+    users_list: {},
     numberOptions: numberOptions,
   };
 
+  componentDidMount() {
+    const a = {auth: { username: this.props.username, password: this.props.password }};
+    this.props.aGetUsers(a);
+    this.setState({ users_list: this.props.users });
+    console.log(this.props.users)
+  }
+
+
+
   countPages = (users_list) => {
+    console.log(this.props.users)
+    console.log(this.state.users_list)
     return Math.ceil(users_list.length / this.state.usersPerPage);
   };
 
@@ -58,6 +63,7 @@ class DashBoard extends Component {
 
 
   render() {
+    this.componentDidMount();
     const { activePage, usersPerPage, users_list, numberOptions } = this.state;
     return (
       <Grid>
@@ -97,8 +103,12 @@ class DashBoard extends Component {
   }
 }
 
+// const mapStateToProps = state => {
+//   return { users: Object.values(state.users)};
+// }
+
 const mapStateToProps = state => {
-  return { users: Object.values(state.users)};
+  return { users: state.users};
 }
 
 const formWrapped = reduxForm({
