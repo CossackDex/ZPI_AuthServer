@@ -12,9 +12,15 @@ class Navbar extends Component {
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name });
 
+  renderName = () => {
+    if (this.props.role === -1) {
+      return "SIGN IN"
+    }
+    return "SIGN OUT"
+  }
+
   render() {
     const { activeItem} = this.state;
-    console.log(this.props.role)
     return (
       <Menu pointing secondary>
         <Route path="/dashboard/admin">
@@ -44,12 +50,12 @@ class Navbar extends Component {
           <Route path="/dashboard/admin">
             <Link to="/dashboard/login">
               {/* <Menu.Item name="logout" onClick={this.handleItemClick} /> */}
-              <Menu.Item name="logout" onClick={() =>  this.props.signOut()} />
+              <Menu.Item name={this.renderName()} onClick={() =>  this.props.signOut()} />
             </Link>
           </Route>
           <Route path="/dashboard/user">
             <Link to="/dashboard/login">
-              <Menu.Item name="logout" onClick={() =>  this.props.signOut()} />
+              <Menu.Item name={this.renderName()} onClick={() =>  this.props.signOut()} />
             </Link>
           </Route>
         </Menu.Menu>
