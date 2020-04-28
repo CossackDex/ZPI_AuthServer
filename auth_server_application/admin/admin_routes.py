@@ -11,7 +11,7 @@ admin_bp = Blueprint('admin_bp', __name__, template_folder='templates', static_f
 @required_login
 @required_admin
 def admin(user=None):
-    users = User.query.filter(User.role.isnot(True)).all()
+    users = User.query.filter(User.superuser.isnot(True)).all()
     all_user_dict = {}
     for user in users:
         all_user_dict = {user.id: {'username': user.username, 'email': user.email,
