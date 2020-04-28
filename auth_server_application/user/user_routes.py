@@ -54,7 +54,7 @@ def user_change_email(user):
     return jsonify(message="User = {} email has been updated".format(user.username)), 200
 
 
-@user_bp.route('/dashboard/user/self_delete', methods=['GET'])
+@user_bp.route('/dashboard/user/self_delete', methods=['DELETE'])
 @required_login
 def user_delete_account(user):
     db.session.delete(user)

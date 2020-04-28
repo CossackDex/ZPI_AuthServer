@@ -11,13 +11,13 @@ services_bp = Blueprint('services_bp', __name__)
 @required_login
 @required_admin
 def services(user=None):
-    if request.method is 'POST':
+    if request.method == 'POST':
         data = request.get_json()
 
         new_service_data = dict(
             service_name=data['service_name'],
             creator_id=user,
-            connection_ip=data['connection_id']
+            connection_ip=data['connection_ip']
         )
         new_service = Services(**new_service_data)
         db.session.add(new_service)
@@ -28,14 +28,16 @@ def services(user=None):
         return jsonify(message='service - {} has been created'.format(new_service.service_name)), 201
     else:
         services_list = Services.query.all()
-        return jsonify(services_list), 200
+        for i in services_list:
+            i.to_dict()
+        return jsonify(), 200
 
 
 @services_bp.route('/dashboard/service/<service_name>', methods=['GET', 'PUT', 'DELETE'])
 @required_login
 @required_admin
 def service(service_name, user=None):
-    if request.method is 'PUT':
+    if request.method == 'PUT':
         data = request.get_json()
         service_data = Services.query.filter_by(service_name=service_name).first()
         service_data.service_name = data['service_name']
@@ -47,7 +49,7 @@ def service(service_name, user=None):
         except IntegrityError as e:
             return jsonify(message="db error", error_message=str(e.orig)), 403
         return jsonify(message='service - {} has been changed'.format(service_data.service_name))
-    elif request.method is 'DELETE':
+    elif request.method == 'DELETE':
         service_data = Services.query.filter_by(service_name=service_name).first()
         if service_name is None:
             return jsonify(message="service doesn't exist"), 400

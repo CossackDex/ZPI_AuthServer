@@ -15,6 +15,7 @@ flask-talisman = "*"
 pyopenssl = "*"
 flask-cors = "*"
 pyjwt = "==1.5.3"
+sqlalchemy-serializer = "*"
 
 [requires]
 python_version = "3.8"

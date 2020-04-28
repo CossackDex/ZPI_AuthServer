@@ -8,7 +8,7 @@ from ..utilities import create_jwt
 jwt_rest_bp = Blueprint('jwt_rest_bp', __name__)
 
 
-@jwt_rest_bp.route('/api/v1/user', methods=['POST'])
+@jwt_rest_bp.route('/api/v1/user', methods=['GET'])
 @required_login
 def jwt(user):
     username = user.username
