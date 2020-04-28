@@ -60,7 +60,8 @@ import {
             type="password"
             placeholder="Password"
             className=""
-          /> {/*Miejsce na klasy Semantic UI*/}
+          />
+           {/*Miejsce na klasy Semantic UI*/}
 
           <Grid centered>
             <GridColumn width={5}>
@@ -107,8 +108,8 @@ import {
         </Form>
 
         <Divider horizontal>Or</Divider>
-        <Route path="/login">
-          <Link to="/register">
+        <Route path="/dashboard/login">
+          <Link to="/dashboard/register">
             <Button content="Sign up" icon="signup" size="big" color="black" />
           </Link>
         </Route>
