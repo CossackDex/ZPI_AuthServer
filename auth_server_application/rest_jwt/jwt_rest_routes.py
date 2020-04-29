@@ -3,7 +3,6 @@ import os
 from flask import Blueprint, jsonify
 
 from ..decorators import required_login
-from ..utilities import create_jwt
 
 jwt_rest_bp = Blueprint('jwt_rest_bp', __name__)
 
@@ -15,7 +14,8 @@ def jwt(user):
     email = user.email
     private_key = os.environ.get('private_key')
     public_key = os.environ.get('public_key')
-    token = create_jwt(username, email)
+    # token = create_jwt(username, email)
+    token = "token"
     # encoded = jwt.encode({'some': 'payload'}, private_key, algorithm='HS256')
     # jwt.encode({'some': 'payload'}, private_key, algorithm='HS256')
     # encoded = jwt.PyJWT.encode({'some': 'payload'}, private_key, algorithm='HS256')

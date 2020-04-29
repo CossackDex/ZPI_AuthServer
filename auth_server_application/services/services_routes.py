@@ -28,9 +28,11 @@ def services(user=None):
         return jsonify(message='service - {} has been created'.format(new_service.service_name)), 201
     else:
         services_list = Services.query.all()
-        for i in services_list:
-            i.to_dict()
-        return jsonify(), 200
+        while services_list:
+            service = services_list.pop()
+            services_listv2 = []
+            services_listv2.append(service.to_dict())
+        return jsonify(services_listv2), 200
 
 
 @services_bp.route('/dashboard/service/<service_name>', methods=['GET', 'PUT', 'DELETE'])

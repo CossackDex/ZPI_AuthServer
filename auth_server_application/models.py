@@ -16,7 +16,8 @@ class User(db.Model, SerializerMixin):
     is_banned = db.Column(db.Boolean, nullable=False, unique=False, default=False)
     force_password_change = db.Column(db.Boolean, nullable=False, unique=False, default=False)
     created_date = db.Column(db.DateTime, default=datetime.now)
-    services = db.relationship('Services', backref='user_data_auth', lazy=True)
+    serialize_rules = ('-services.user',)
+    services = db.relationship('Services', backref='user', lazy=True)
 
     def __init__(self, role=False, superuser=False, **kwargs):
         self.username = kwargs['username']
