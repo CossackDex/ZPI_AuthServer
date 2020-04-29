@@ -45,22 +45,35 @@ class EditWindow extends Component {
   };
 
   onSubmit = (formValues) => {
-    const a = {auth: { username: this.props.username, password: this.props.password }};
+    const a = {
+      auth: { username: this.props.username, password: this.props.password },
+    };
     if (formValues.newmail && !formValues.oldpass) {
       this.props.changeMail(formValues.newmail, a);
-    }
-    else if (!formValues.newmail && formValues.oldpass && formValues.newpass && formValues.confirmpass && formValues.oldpass === this.props.password && formValues.newpass === formValues.confirmpass) {
+    } else if (
+      !formValues.newmail &&
+      formValues.oldpass &&
+      formValues.newpass &&
+      formValues.confirmpass &&
+      formValues.oldpass === this.props.password &&
+      formValues.newpass === formValues.confirmpass
+    ) {
       this.props.changePass(formValues.newpass, a);
-    }
-    else if (formValues.newmail && formValues.oldpass && formValues.newpass && formValues.confirmpass && formValues.oldpass === this.props.password && formValues.newpass === formValues.confirmpass && !(formValues.oldpass === this.props.newpass)) {
+    } else if (
+      formValues.newmail &&
+      formValues.oldpass &&
+      formValues.newpass &&
+      formValues.confirmpass &&
+      formValues.oldpass === this.props.password &&
+      formValues.newpass === formValues.confirmpass &&
+      !(formValues.oldpass === this.props.newpass)
+    ) {
       this.props.changeMail(formValues.newmail, a);
       this.props.changePass(formValues.newpass, a);
+    } else {
+      return console.log("Nothing to do");
     }
-    else {
-      return console.log("Nothing to do")
-    }
-
-    };
+  };
 
   render() {
     const { username, useremail, role } = this.props;
@@ -85,21 +98,37 @@ class EditWindow extends Component {
             </Table.Row>
           </Table.Header>
           <Table.Body>
-            <Table.Row>
-              <Table.Cell width={7}>
-                <b>E-mail</b>
-              </Table.Cell>
-              <Table.Cell collapsing>
-                <Field
-                  name="newmail"
-                  component={this.renderInput}
-                  type="text"
-                  placeholder="New E-mail"
-                  className=""
-                />
-              </Table.Cell>
-            </Table.Row>
+          <Route exact path="/dashboard/admin">
+              <Table.Row>
+                <Table.Cell width={7}>
+                  <b>E-mail</b>
+                </Table.Cell>
+                <Table.Cell collapsing>
+                  <Field
+                    name="newmail"
+                    component={useremail}
+                    type="text"
+                    placeholder="New E-mail"
+                    className=""
+                  />
+                </Table.Cell>
+              </Table.Row>
+              </Route>
             <Route exact path="/dashboard/user">
+              <Table.Row>
+                <Table.Cell width={7}>
+                  <b>E-mail</b>
+                </Table.Cell>
+                <Table.Cell collapsing>
+                  <Field
+                    name="newmail"
+                    component={this.renderInput}
+                    type="text"
+                    placeholder="New E-mail"
+                    className=""
+                  />
+                </Table.Cell>
+              </Table.Row>
               <Table.Row>
                 <Table.Cell width={7}>
                   <b>Old Password</b>
@@ -191,7 +220,7 @@ const mapStateToProps = (state) => {
     username: state.sign.username,
     password: state.sign.password,
     useremail: state.sign.email,
-    role: state.sign.role
+    role: state.sign.role,
   };
 };
 
