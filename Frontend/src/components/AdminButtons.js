@@ -46,7 +46,6 @@ class UsersTable extends Component {
           onCancel={this.close}
           onConfirm={this.handleOnClick}
         />
-
         <Button inverted color="red" onClick={this.open}>
           Delete
         </Button>
