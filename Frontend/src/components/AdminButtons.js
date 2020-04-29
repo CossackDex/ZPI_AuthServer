@@ -37,8 +37,15 @@ class UsersTable extends Component {
           content={banned ? "Banned" : "Ban"}
           color={banned ? "red" : "grey"}
           // active={banned}
-          onClick={this.handleOnClick}
+          // onClick={this.handleOnClick}
+          onClick={this.open}
         ></Button>
+        <Confirm
+          size="mini"
+          open={this.state.open}
+          onCancel={this.close}
+          onConfirm={this.handleOnClick}
+        />
 
         <Button inverted color="red" onClick={this.open}>
           Delete
