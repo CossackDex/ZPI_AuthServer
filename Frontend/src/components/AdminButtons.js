@@ -15,19 +15,24 @@ class UsersTable extends Component {
     banned: false,
     color: "grey",
     name: "Unbaned",
-    open: false,
+    openban: false,
+    opendel: false,
   };
 
     onDelete = () => {
     const a = {auth: { username: this.props.username, password: this.props.password }};
     this.props.aDeleteUser(a);
+    this.setState({ opendel: false })
   };
 
   handleOnClick = () => {
     this.setState({ banned: !this.state.banned });
+    this.setState({ openban: false })
   };
-  open = () => this.setState({ open: true });
-  close = () => this.setState({ open: false });
+  openban = () => this.setState({ openban: true });
+  opendel = () => this.setState({ opendel: true });
+  closeban = () => this.setState({ openban: false });
+  closedel = () => this.setState({ opendel: false });
   render() {
     const { banned } = this.state;
 
@@ -38,21 +43,21 @@ class UsersTable extends Component {
           color={banned ? "red" : "grey"}
           // active={banned}
           // onClick={this.handleOnClick}
-          onClick={this.open}
+          onClick={this.openban}
         ></Button>
         <Confirm
           size="mini"
-          open={this.state.open}
-          onCancel={this.close}
+          open={this.state.openban}
+          onCancel={this.closeban}
           onConfirm={this.handleOnClick}
         />
-        <Button inverted color="red" onClick={this.open}>
+        <Button inverted color="red" onClick={this.opendel}>
           Delete
         </Button>
         <Confirm
           size="mini"
-          open={this.state.open}
-          onCancel={this.close}
+          open={this.state.opendel}
+          onCancel={this.closedel}
           onConfirm={this.onDelete}
         />
       </Button.Group>
