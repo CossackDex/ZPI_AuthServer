@@ -4,15 +4,26 @@ h1 {
     /* font-family: 'Montserrat Subrayada', sans-serif; */
     font-size: 50px;
     border-bottom: 2px solid #f1f1f1;
-    width: 30%;
+    width: 50%;
     padding-bottom: 20px;
     /* padding-top: 20px; */
 
 }
 
 
-img {
+.leftblock {
     width: 30%;
-    float: left;
+    float: center;
     margin: 1.66%;
+    margin-left: auto;
+    
+}
+.rightblock {
+    width: 30%;
+    float: center;
+    margin: 1.66%;
+    margin-right: auto;
+}
+p {
+    text-align: center
 }
