@@ -27,13 +27,17 @@ div h1 {
 
 }
 .banner {
-    height: 550px;
+    /* height: 550px; */
+    
     background: linear-gradient( rgba(0, 0, 0, 0), rgba(255, 255, 255, 0.999)), /* bottom, image */
-	url("space.jpg");
+  url("space.jpg");
+  background-repeat: no-repeat;
+    background-size: cover;
 
 }
 button {
-    background: black;/* linear-gradient( rgba(0, 0, 0, 0), rgba(255, 255, 255, 0.999)), bottom, image 
+    background: black;
+/* linear-gradient( rgba(0, 0, 0, 0), rgba(255, 255, 255, 0.999)), bottom, image 
     url("space.jpg");*/
     font-family: 'Bebas Neue';
     font-size: 18px;
