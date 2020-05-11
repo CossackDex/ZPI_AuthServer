@@ -10,6 +10,14 @@ h1 {
 
 }
 
+
+@import url('https://fonts.googleapis.com/css?family=Pacifico');
+.section {
+	max-width: 960px;
+	margin: 0 auto;
+	padding: 6% 2%;
+}
+
 .grid {
 	margin: 20px 0 0 0;
 	padding: 0;
@@ -17,16 +25,22 @@ h1 {
 	display: block;
 	text-align: center;
 	width: 100%;
-} 
+}
 
-li {
-	width: 500px;
+.grid:after {
+	clear: both;
+}
+
+.grid:after, .box:before {
+	content: '';
+	display: table;
+}
+
+.grid li {
+    width: 400px;
 	height: 328px;
 	display: inline-block;
-	margin: 2px;
-}
-div {
-    text-align: center
+	margin: 20px;
 }
 
 .box {
@@ -46,14 +60,15 @@ div {
 .box:hover {
 	transform: scale(1.05); 
 }
+
 .img-1 {
 	background: linear-gradient( rgba(0, 0, 0, 0.50), rgba(0, 0, 0, 0.10)), /* bottom, image */
-	url(https://c4.wallpaperflare.com/wallpaper/652/798/356/snow-night-animals-doge-memes-wallpaper-preview.jpg);
+    url("pieselbutton.jpg");
 }
 
 .img-2 {
 	background: linear-gradient( rgba(0, 0, 0, 0.50), rgba(0, 0, 0, 0.10)), /* bottom, image */
-	url(https://wallpapertag.com/wallpaper/full/c/8/6/743336-marvel-hd-wallpapers-2880x1800-iphone.jpg);
+	url("marvelbutton.jpg");
 }
 
 .info {
@@ -62,26 +77,27 @@ div {
 	height: inherit;
 }
 
-.info h3 {
-	font-family: 'Pacifico', cursive;
+.info h3 {   
+    font-family: 'Bebas Neue', cursive;
+    /* font-family: 'Jockey One', sans-serif; */
 	font-weight: 400;
-	color: rgb(0, 0, 0);
+	color: #fff;
 	font-size: 42px;
-	margin: 0 30px;
+	margin: 0 100px;
 	padding: 100px 0 0 0;
 	line-height: 1.5;
 }
 
 .info p {
 	font-family: 'Source Sans Pro', sans-serif;
-	color: rgb(0, 0, 0);
+	color: #fff;
 	padding: 4px 5px;
 	margin: 0 30px;
 	font-size: 14px;
 	line-height: 2;
 }
 
-.leftblock {
+/* .leftblock {
     width: 30%;
     float: center;
     margin: 1.66%;
@@ -93,4 +109,4 @@ div {
     float: center;
     margin: 1.66%;
     margin-right: auto;
-}
+} */
