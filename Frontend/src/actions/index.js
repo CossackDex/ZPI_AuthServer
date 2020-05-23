@@ -38,7 +38,7 @@ export const signOut = () => {
 };
 
 export const signUp = formValues => async dispatch => {
-  const f = { ...formValues, role: 0 };
+  const f = { ...formValues };
   await flask.post("/dashboard/signup", f);
   const a = {
     auth: { username: formValues.username, password: formValues.password },
@@ -87,11 +87,37 @@ export const aGetUsers = (a) => async dispatch => {
 }
 
 export const aDeleteUser = (a, user) => async dispatch => {
-  console.log("/dashboard/admin/user/"+ user +"/delete_account")
   await flask.get("/dashboard/admin/user/"+ user +"/delete_account", a);
   const response = await flask.get("/dashboard/admin", a)
   dispatch({ type: A_GET_USERS, payload: response.data });
 };
+
+export const aBanUser = (a, user) => async dispatch => {
+  await flask.get("/dashboard/admin/user/"+ user +"/ban_user", a);
+  const response = await flask.get("/dashboard/admin", a)
+  dispatch({ type: A_GET_USERS, payload: response.data });
+};
+
+export const aUnbanUser = (a, user) => async dispatch => {
+  await flask.get("/dashboard/admin/user/"+ user +"/unban_user", a);
+  const response = await flask.get("/dashboard/admin", a)
+  dispatch({ type: A_GET_USERS, payload: response.data });
+};
+
+export const aSanction = (a, user) => async dispatch => {
+  await flask.get("/dashboard/admin/user/"+ user +"/give_privileges", a);
+  const response = await flask.get("/dashboard/admin", a)
+  dispatch({ type: A_GET_USERS, payload: response.data });
+};
+
+export const aForcePass = (a, user) => async dispatch => {
+  await flask.get("/dashboard/admin/user/"+ user +"/force_password_change", a);
+  const response = await flask.get("/dashboard/admin", a)
+  dispatch({ type: A_GET_USERS, payload: response.data });
+  if (response) {alert("Request has been sent")}
+};
+
+
 
 // export const aGetUser = () => {
 
@@ -101,9 +127,6 @@ export const aDeleteUser = (a, user) => async dispatch => {
 
 // }
 
-// export const aForcePass = () => {
-
-// }
 
 export const aChangeMail = (newmail, a) => async dispatch => {
     const nmail = { new_email: newmail };
@@ -113,11 +136,9 @@ export const aChangeMail = (newmail, a) => async dispatch => {
 
 }
 
+
+
 // export const aForceMail = () => {
-
-// }
-
-// export const sPower = () => {
 
 // }
 

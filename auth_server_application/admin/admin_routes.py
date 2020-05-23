@@ -15,6 +15,7 @@ def admin(user=None):
     all_user_dict = {}
     for user in users:
         all_user_dict = {user.id: {'id': user.id, 'username': user.username, 'email': user.email,
+        'role': user.role,
                                    'created_date': user.created_date, 'is_banned': user.is_banned,
                                    'force_password_change': user.force_password_change}}
     return jsonify(users_list=all_user_dict), 200

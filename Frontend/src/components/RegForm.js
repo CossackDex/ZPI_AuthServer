@@ -27,6 +27,9 @@ class RegForm extends React.Component {
   }
 
   onSubmit = (formValues) => {
+    if (!formValues.role) {formValues.role = 0}
+    if (!formValues.superuser) {formValues.superuser = 0}
+    console.log(formValues)
     this.props.signUp(formValues)
   }
 
@@ -59,7 +62,21 @@ class RegForm extends React.Component {
           placeholder="Password"
           className=""
         />{/*Miejsce na klasy Semantic UI*/}
-
+          <Field
+          name="role"
+          component={this.renderInput}
+          type="checkbox"
+          placeholder="Role"
+          className=""
+        />{/*Miejsce na klasy Semantic UI*/}
+        
+        <Field
+          name="superuser"
+          component={this.renderInput}
+          type="checkbox"
+          placeholder="Superuser"
+          className=""
+        />{/*Miejsce na klasy Semantic UI*/}
         <Button color="teal" type="submit">Sign up</Button>
       </Form>
 
