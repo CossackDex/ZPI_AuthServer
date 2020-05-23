@@ -10,7 +10,7 @@ import {
   Confirm,
 } from "semantic-ui-react";
 
-class UsersTable extends Component {
+class AdminButtons extends Component {
   state = {
     banned: false,
     color: "grey",
@@ -20,7 +20,7 @@ class UsersTable extends Component {
 
     onDelete = () => {
     const a = {auth: { username: this.props.username, password: this.props.password }};
-    this.props.aDeleteUser(a);
+    this.props.aDeleteUser(a, user);
   };
 
   handleOnClick = () => {
@@ -62,4 +62,4 @@ const mapStateToProps = state => {
   };
 }
 
-export default connect(mapStateToProps, {aDeleteUser})(UsersTable);
+export default connect(mapStateToProps, {aDeleteUser})(AdminButtons);

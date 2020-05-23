@@ -87,9 +87,10 @@ export const aGetUsers = (a) => async dispatch => {
 }
 
 export const aDeleteUser = (a, user) => async dispatch => {
-  // await flask.get("/dashboard/admin/user/"+ +"/delete_account", a);
-  // const response = await flask.get("/dashboard/admin", a)
-  // dispatch({ type: A_GET_USERS, payload: response.data });
+  console.log("/dashboard/admin/user/"+ user +"/delete_account")
+  await flask.get("/dashboard/admin/user/"+ user +"/delete_account", a);
+  const response = await flask.get("/dashboard/admin", a)
+  dispatch({ type: A_GET_USERS, payload: response.data });
 };
 
 // export const aGetUser = () => {

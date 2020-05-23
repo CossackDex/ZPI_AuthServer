@@ -164,7 +164,7 @@ class EditWindow extends Component {
                     size="mini"
                     open={this.state.open}
                     onCancel={this.close}
-                    onConfirm={this.onDelete}
+                    onConfirm={this.close}
                   />
                   <Button
                     floated="right"
@@ -172,6 +172,7 @@ class EditWindow extends Component {
                     labelPosition="left"
                     color="teal"
                     size="small"
+                    onClick={this.onSubmit}
                   >
                     <Icon name="edit" />
                      Save changes

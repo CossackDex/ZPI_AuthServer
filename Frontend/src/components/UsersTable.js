@@ -22,7 +22,7 @@ export default class UsersTable extends Component {
           role={user.role}></ModalScreen>
         </Table.Cell>
         <Table.Cell width={1}>
-          <AdminButtons></AdminButtons>
+          <AdminButtons/>
         </Table.Cell>
       </Table.Row>
     );
