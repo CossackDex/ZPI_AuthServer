@@ -2,7 +2,8 @@ import React from "react";
 import { Route, Link } from "react-router-dom";
 import { Field, reduxForm } from "redux-form";
 import { connect } from "react-redux";
-import { aGetUsers, aBanUser, aDeleteUser, aSanction, aForcePass, aUnbanUser } from "../actions"
+import history from "../history";
+import { aGetUser, aGetUsers, aBanUser, aDeleteUser, aSanction, aForcePass, aUnbanUser } from "../actions"
 
 class UsersList extends React.Component {
 
@@ -19,9 +20,11 @@ class UsersList extends React.Component {
 
       onEdit = (user) => {
         const a = {auth: { username: this.props.username, password: this.props.password }};
-        //history.push(/dashboard/admin/user/edit)
+        this.props.aGetUser(a, user)
+        history.push("/dashboard/admin/users/"+user.id+"/email")
       };
 
+      
       onSanction = (user) => {
         const a = {auth: { username: this.props.username, password: this.props.password }};
         this.props.aSanction(a, user);
@@ -59,7 +62,7 @@ class UsersList extends React.Component {
             return(
                 <div className="item" key={user.id}>
                     <div className="right floated content">
-                        <button className="ui button primary" onClick={()=>{this.onEdit(user.username)}}>Edit</button>
+                        <button className="ui button primary" onClick={()=>{this.onEdit(user)}}>Edit</button>
                         <button className="ui button secondary" onClick={()=>{this.onForce(user.username)}}>Force new pass</button>
                         <button className="ui button secondary" onClick={()=>{this.onBan(user.username)}}>{this.renderBan()}</button>
                         {this.renderSanction(user)}
@@ -123,4 +126,4 @@ const mapStateToProps = state => {
       };
 }
 
-export default connect(mapStateToProps, {aGetUsers, aBanUser, aDeleteUser, aSanction, aForcePass, aUnbanUser})(UsersList);
+export default connect(mapStateToProps, {aGetUser, aGetUsers, aBanUser, aDeleteUser, aSanction, aForcePass, aUnbanUser})(UsersList);
