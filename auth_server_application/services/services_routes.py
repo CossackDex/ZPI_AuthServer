@@ -3,6 +3,7 @@ from sqlalchemy.exc import IntegrityError
 
 from ..decorators import *
 from ..models import *
+from ..schema import ServicesSchema
 
 services_bp = Blueprint('services_bp', __name__)
 
@@ -28,11 +29,8 @@ def services(user=None):
         return jsonify(message='service - {} has been created'.format(new_service.service_name)), 201
     else:
         services_list = Services.query.all()
-        while services_list:
-            service = services_list.pop()
-            services_listv2 = []
-            services_listv2.append(service.to_dict())
-        return jsonify(services_listv2), 200
+        services_schema = ServicesSchema(many=True)
+        return jsonify({'services': services_schema.dump(services_list)}), 200
 
 
 @services_bp.route('/dashboard/service/<service_name>', methods=['GET', 'PUT', 'DELETE'])

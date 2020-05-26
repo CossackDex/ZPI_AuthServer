@@ -1,11 +1,9 @@
 from datetime import datetime
 
-from sqlalchemy_serializer import SerializerMixin
-
 from . import db
 
 
-class User(db.Model, SerializerMixin):
+class User(db.Model):
     __tablename__ = "user_data_auth"
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
@@ -16,8 +14,6 @@ class User(db.Model, SerializerMixin):
     is_banned = db.Column(db.Boolean, nullable=False, unique=False, default=False)
     force_password_change = db.Column(db.Boolean, nullable=False, unique=False, default=False)
     created_date = db.Column(db.DateTime, default=datetime.now)
-    serialize_rules = ('-services.user',)
-    services = db.relationship('Services', backref='user', lazy=True)
 
     def __init__(self, role=False, superuser=False, **kwargs):
         self.username = kwargs['username']
@@ -30,13 +26,14 @@ class User(db.Model, SerializerMixin):
         return '<User {}>'.format(self.username)
 
 
-class Services(db.Model, SerializerMixin):
+class Services(db.Model):
     __tablename__ = "Services_list"
     id = db.Column(db.Integer, primary_key=True)
     service_name = db.Column(db.String(80), unique=True, nullable=False)
     creator_id = db.Column(db.Integer, db.ForeignKey('user_data_auth.id'), nullable=False)
     connection_ip = db.Column(db.String(250), unique=False, nullable=False)
     created_date = db.Column(db.DateTime, default=datetime.now)
+    creator = db.relationship('User', backref='services')
 
     def __init__(self, **kwargs):
         self.service_name = kwargs['service_name']

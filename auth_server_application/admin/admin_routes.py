@@ -3,6 +3,7 @@ from sqlalchemy.exc import IntegrityError
 
 from ..decorators import *
 from ..models import *
+from ..schema import UserSchema
 
 admin_bp = Blueprint('admin_bp', __name__, template_folder='templates', static_folder='static')
 
@@ -12,12 +13,8 @@ admin_bp = Blueprint('admin_bp', __name__, template_folder='templates', static_f
 @required_admin
 def admin(user=None):
     users = User.query.filter(User.superuser.isnot(True)).all()
-    all_user_dict = {}
-    for user in users:
-        all_user_dict = {user.id: {'id': user.id, 'username': user.username, 'email': user.email,
-                                   'created_date': user.created_date, 'is_banned': user.is_banned,
-                                   'force_password_change': user.force_password_change}}
-    return jsonify(users_list=all_user_dict), 200
+    user_schema = UserSchema(many=True)
+    return jsonify({'user': user_schema.dump(users)}), 200
 
 
 @admin_bp.route('/dashboard/admin/user/<username>/give_privileges', methods=['GET'])
