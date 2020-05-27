@@ -258,3 +258,6 @@ server.csr
 .history
 
 .vscode
+
+jwt-key
+jwt_key.pub

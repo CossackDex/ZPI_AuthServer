@@ -18,6 +18,7 @@ pyjwt = "==1.5.3"
 flask-marshmallow = "*"
 protobuf = "*"
 marshmallow-sqlalchemy = "*"
+gunicorn = "*"
 
 [requires]
 python_version = "3.8"

@@ -13,17 +13,11 @@ jwt_rest_bp = Blueprint('jwt_rest_bp', __name__)
 def jwt(user):
     username = user.username
     email = user.email
-    private_key = os.environ.get('private_key')
-    public_key = os.environ.get('public_key')
     token = create_jwt(username, email)
-    # token = "token"
-    # encoded = jwt.encode({'some': 'payload'}, private_key, algorithm='HS256')
-    # jwt.encode({'some': 'payload'}, private_key, algorithm='HS256')
-    # encoded = jwt.PyJWT.encode({'some': 'payload'}, private_key, algorithm='HS256')
-    return jsonify(token=token), 200
+    return jsonify(token=token.decode('utf-8')), 200
 
 
-@jwt_rest_bp.route('api/v1/service_get_pub', methods=['GET'])
+@jwt_rest_bp.route('/api/v1/service_get_pub', methods=['GET'])
 def get_pub():
-    pub = open('jwt-key').read()
+    pub = os.environ.get('public_key')
     return jsonify(pub=pub), 200
