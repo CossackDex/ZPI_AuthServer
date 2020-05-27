@@ -10,6 +10,6 @@ class Config:
     FLASK_ENV = environ.get('FLASK_ENV')
 
     # Database
-    SQLALCHEMY_DATABASE_URI = 'mysql+mysqlconnector://admin_sso_auth@zpi-sso-auth:1qaz@WSX3edc@zpi-sso-auth.mysql.database.azure.com:3306/user_data_schema'
+    SQLALCHEMY_DATABASE_URI = environ.get("SQLALCHEMY_DATABASE_URI")
     SQLALCHEMY_ECHO = environ.get("SQLALCHEMY_ECHO")
     SQLALCHEMY_TRACK_MODIFICATIONS = environ.get("SQLALCHEMY_TRACK_MODIFICATIONS")
