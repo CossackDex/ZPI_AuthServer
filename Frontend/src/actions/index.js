@@ -10,6 +10,8 @@ import {
   DELETE_ME,
   A_GET_USER,
   A_GET_USERS,
+  A_GET_SERVICES,
+  A_POST_SERVICE,
   // A_GET_USER,
   // A_CHANGE_PASS,
   // A_FORCE_PASS,
@@ -128,16 +130,6 @@ export const aForcePass = (a, user) => async dispatch => {
 };
 
 
-
-// export const aGetUser = () => {
-
-// }
-
-// export const aChangePass = () => {
-
-// }
-
-
 export const aChangeMail = (newmail, a, username) => async dispatch => {
     const nmail = { new_email: newmail };
     await flask.post('/dashboard/admin/user/'+username+'/change_email', nmail, a);
@@ -147,11 +139,21 @@ export const aChangeMail = (newmail, a, username) => async dispatch => {
 }
 
 
+export const aGetServices = (a) => async dispatch => {
+  const response = await flask.get("/dashboard/services", a)
+  dispatch({ type: A_GET_SERVICES, payload: response.data });
+}
 
-// export const aForceMail = () => {
+export const aPostService = (formValues, a) => async dispatch => {
+  const f = { ...formValues };
+  await flask.post("/dashboard/services", f, a);
+  const response = await flask.get("/dashboard/services", a);
+  dispatch({ type: A_GET_SERVICES, payload: response.data });
+  history.push("/dashboard/admin/services");
+};
 
-// }
-
-// export const sPower = () => {
-
+// export const aGetService = (a, service_name) => async dispatch => {
+//   const response = await flask.get("/dashboard/service/"+service_name, a)
+//   dispatch({ type: A_GET_SERVICE, payload: response.data });
+//   history.push("/dashboard/admin/services");
 // }

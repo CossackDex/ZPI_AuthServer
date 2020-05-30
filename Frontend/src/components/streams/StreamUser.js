@@ -15,7 +15,7 @@ import {
   Header,
 } from "semantic-ui-react";
 
-class StreamDashBoardUser extends Component {
+class StreamUser extends Component {
   state = {};
 
   handlePaginationChange = (e, { activePage }) => this.setState({ activePage });
@@ -60,4 +60,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, {})(StreamDashBoardUser);
+export default connect(mapStateToProps, {})(StreamUser);

@@ -3,77 +3,37 @@ import { Route, Link } from "react-router-dom";
 import { Field, reduxForm } from "redux-form";
 import { connect } from "react-redux";
 import history from "../history";
-import { aGetUser, aGetUsers, aBanUser, aDeleteUser, aSanction, aForcePass, aUnbanUser } from "../actions"
+import { aGetServices } from "../actions"
 
-class UsersList extends React.Component {
-
-    onBan = (user) => {
-        const a = {auth: { username: this.props.username, password: this.props.password }};
-        if (!this.props.is_banned) this.props.aBanUser(a, user);
-        else {this.props.aUnbanUser(a, user)}
-      };
-
-      onDelete = (user) => {
-        const a = {auth: { username: this.props.username, password: this.props.password }};
-        this.props.aDeleteUser(a, user);
-      };
-
-      onEdit = (user) => {
-        const a = {auth: { username: this.props.username, password: this.props.password }};
-        this.props.aGetUser(a, user)
-        history.push("/dashboard/admin/users/"+user.id+"/email")
-      };
-
-      
-      onSanction = (user) => {
-        const a = {auth: { username: this.props.username, password: this.props.password }};
-        this.props.aSanction(a, user);
-      }
-
-      onForce = (user) => {
-        const a = {auth: { username: this.props.username, password: this.props.password }};
-        this.props.aForcePass(a, user)
-      }
+class ServicesList extends React.Component {
 
 
     componentDidMount() {
         const a = {auth: { username: this.props.username, password: this.props.password }};
         if (a) {
-        this.props.aGetUsers(a);
+        this.props.aGetServices(a);
         }
     }
 
-    renderBan() {
-        if (this.props.is_banned) {return "Unban"}
-        else {return "Ban"}
-    }
-
-    renderSanction(user) {
-        if (!user.role && this.props.superuser) {return <button className="ui button secondary" onClick={()=>{this.onSanction(user.username)}}>Sanction</button>}
-        else {return null}
-    }
-
     renderList() {
-    while (!this.props.users) {
+    while (!this.props.services) {
         return <div>LOADING</div>
     }
-        const u = Object.values(this.props.users);
-        return u.map(user => {
+        const u = Object.values(this.props.services);
+        return u.map(service => {
             return(
-                <div className="item" key={user.id}>
+                <div className="item" key={service.id}>
                     <div className="right floated content">
-                        <button className="ui button primary" onClick={()=>{this.onEdit(user)}}>Edit</button>
-                        <button className="ui button secondary" onClick={()=>{this.onForce(user.username)}}>Force new pass</button>
-                        <button className="ui button secondary" onClick={()=>{this.onBan(user.username)}}>{this.renderBan()}</button>
-                        {this.renderSanction(user)}
-                        <button className="ui button negative" onClick={()=>{this.onDelete(user.username)}}>Delete</button>
+                        <button className="ui button primary" onClick={()=>{}}>Edit</button>
+                        <button className="ui button negative" onClick={()=>{}}>Delete</button>
                     </div>
                     <div className="left floated content">
                     <i className="large middle aligned icon user"/>
-                    <i className="content">{user.id}</i>
-                    <i className="content">{user.username}</i>
-                    <i className="content">{user.email}</i>
-                    <i className="content">{user.created_date}</i>
+                    <i className="content">{service.id}</i>
+                    <i className="content">{service.service_name}</i>
+                    <i className="content">{service.creator_id}</i>
+                    <i className="content">{service.connection_ip}</i>
+                    <i className="content">{service.created_date}</i>
                     </div>
                 </div>
             )
@@ -81,35 +41,37 @@ class UsersList extends React.Component {
         
     }
 
-    componentDidUpdate() {
-        console.log("Update")
-        return(
-            <div className="left floated content">
-                <h2>Users</h2>
-                <div>
-                    <i className="content">ID</i>
-                    <i className="content">Username</i>
-                    <i className="content">Email</i>
-                    <i className="content">Create Date</i>
-                    <i className="content">Is Banned</i>
-                </div>
-                <div className="ui celled list">{this.renderList()}</div>
-            </div>
-          );
-    }
+    // componentDidUpdate() {
+    //     console.log("Update")
+    //     return(
+    //         <div className="left floated content">
+    //             <h2>Users</h2>
+    //             <div>
+    //                 <i className="content">ID</i>
+    //                 <i className="content">Service</i>
+    //                 <i className="content">Creator</i>
+    //                 <i className="content">IP</i>
+    //                 <i className="content">Create Date</i>
+    //             </div>
+    //             <div className="ui celled list">{this.renderList()}</div>
+    //         </div>
+    //       );
+    // }
 
 
     render() {
-        console.log("Update")
         return(
-            <div className="left floated content">
-                <h2>Users</h2>
+            <div>
+                <div>
+                <h2>Services</h2>
+                <button className="right floated content ui button primary " >Create Service</button>
+                </div>
                 <div>
                     <i className="content">ID</i>
-                    <i className="content">Username</i>
-                    <i className="content">Email</i>
+                    <i className="content">Service</i>
+                    <i className="content">Creator</i>
+                    <i className="content">IP</i>
                     <i className="content">Create Date</i>
-                    <i className="content">Is Banned</i>
                 </div>
                 <div className="ui celled list">{this.renderList()}</div>
             </div>
@@ -119,11 +81,10 @@ class UsersList extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        users: state.admin.user,
+        services: state.service.services,
         username: state.sign.username,
-        password: state.sign.password,
-        superuser: state.sign.superuser
+        password: state.sign.password
       };
 }
 
-export default connect(mapStateToProps, {aGetUser, aGetUsers, aBanUser, aDeleteUser, aSanction, aForcePass, aUnbanUser})(UsersList);
+export default connect(mapStateToProps, {aGetServices})(ServicesList);

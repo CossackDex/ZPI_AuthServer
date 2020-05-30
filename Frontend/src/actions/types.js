@@ -14,3 +14,4 @@ export const A_FORCE_MAIL = 'A_FORCE_MAIL';
 export const A_DELETE_USER = 'A_DELETE_USER';
 export const S_POWERS = 'S_POWERS';
 export const S_POWER = 'S_POWER';
+export const A_GET_SERVICES = 'A_GET_SERVICES';

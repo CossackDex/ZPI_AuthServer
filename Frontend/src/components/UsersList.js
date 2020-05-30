@@ -100,7 +100,6 @@ class UsersList extends React.Component {
 
 
     render() {
-        console.log("Update")
         return(
             <div className="left floated content">
                 <h2>Users</h2>
