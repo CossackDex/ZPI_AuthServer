@@ -8,9 +8,11 @@ import StreamTest from "./streams/StreamTest";
 import StreamLogin from "./streams/StreamLogin";
 import StreamReg from "./streams/StreamReg";
 
-import StreamDashboardAdmin from "./streams/StreamDashboardAdmin";
+import StreamAdmin from "./streams/StreamAdmin";
 import StreamDashBoardUser from "./streams/StreamDashBoardUser";
-import StreamDashboardServices from "./streams/StreamDashboardServices";
+import StreamServices from "./streams/StreamServices";
+import StreamEditEmail from "./streams/StreamEditEmail";
+
 import Navbar from "./Navbar";
 
 const App = () => {
@@ -25,9 +27,9 @@ const App = () => {
           <Route path="/dashboard/login" exact component={StreamLogin} />
           <Route path="/dashboard/register" exact component={StreamReg} />
 
-          <Route path="/dashboard/admin/users" exact component={StreamDashboardAdmin} />
-
-          <Route path="/dashboard/admin/services" exact component={StreamDashboardServices}/>
+          <Route path="/dashboard/admin/users" exact component={StreamAdmin} />
+          <Route path="/dashboard/admin/users/:id/email" exact component={StreamEditEmail} />
+          <Route path="/dashboard/admin/services" exact component={StreamServices}/>
 
           {role > -1 && <Route path="/dashboard/user" exact component={StreamDashBoardUser} />}
         </Switch>

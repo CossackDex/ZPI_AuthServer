@@ -8,6 +8,7 @@ import {
   CHANGE_PASS,
   CHANGE_MAIL,
   DELETE_ME,
+  A_GET_USER,
   A_GET_USERS,
   // A_GET_USER,
   // A_CHANGE_PASS,
@@ -38,7 +39,7 @@ export const signOut = () => {
 };
 
 export const signUp = formValues => async dispatch => {
-  const f = { ...formValues, role: 0 };
+  const f = { ...formValues };
   await flask.post("/dashboard/signup", f);
   const a = {
     auth: { username: formValues.username, password: formValues.password },
@@ -81,17 +82,50 @@ export const deleteMe = (currentUser, currentPass) => async dispatch => {
   dispatch({ type: DELETE_ME });
 };
 
+export const aGetUser = (a, user) => async dispatch => {
+  const response = await flask.get("/dashboard/admin", a)
+  const {id} = user
+  const thisUser = response.data.users_list[id];
+  dispatch({ type: A_GET_USER, payload: thisUser });
+}
+
 export const aGetUsers = (a) => async dispatch => {
   const response = await flask.get("/dashboard/admin", a)
   dispatch({ type: A_GET_USERS, payload: response.data });
 }
 
 export const aDeleteUser = (a, user) => async dispatch => {
-  console.log("/dashboard/admin/user/"+ user +"/delete_account")
   await flask.get("/dashboard/admin/user/"+ user +"/delete_account", a);
   const response = await flask.get("/dashboard/admin", a)
   dispatch({ type: A_GET_USERS, payload: response.data });
 };
+
+export const aBanUser = (a, user) => async dispatch => {
+  await flask.get("/dashboard/admin/user/"+ user +"/ban_user", a);
+  const response = await flask.get("/dashboard/admin", a)
+  dispatch({ type: A_GET_USERS, payload: response.data });
+};
+
+export const aUnbanUser = (a, user) => async dispatch => {
+  await flask.get("/dashboard/admin/user/"+ user +"/unban_user", a);
+  const response = await flask.get("/dashboard/admin", a)
+  dispatch({ type: A_GET_USERS, payload: response.data });
+};
+
+export const aSanction = (a, user) => async dispatch => {
+  await flask.get("/dashboard/admin/user/"+ user +"/give_privileges", a);
+  const response = await flask.get("/dashboard/admin", a)
+  dispatch({ type: A_GET_USERS, payload: response.data });
+};
+
+export const aForcePass = (a, user) => async dispatch => {
+  await flask.get("/dashboard/admin/user/"+ user +"/force_password_change", a);
+  const response = await flask.get("/dashboard/admin", a)
+  dispatch({ type: A_GET_USERS, payload: response.data });
+  if (response) {alert("Request has been sent")}
+};
+
+
 
 // export const aGetUser = () => {
 
@@ -101,23 +135,18 @@ export const aDeleteUser = (a, user) => async dispatch => {
 
 // }
 
-// export const aForcePass = () => {
 
-// }
-
-export const aChangeMail = (newmail, a) => async dispatch => {
+export const aChangeMail = (newmail, a, username) => async dispatch => {
     const nmail = { new_email: newmail };
-    await flask.post("/dashboard/user/change_email", nmail, a);
+    await flask.post('/dashboard/admin/user/'+username+'/change_email', nmail, a);
     const response = await flask.get("/dashboard/admin", a)
     dispatch({ type: A_GET_USERS, payload: response.data });
 
 }
 
+
+
 // export const aForceMail = () => {
-
-// }
-
-// export const sPower = () => {
 
 // }
 
