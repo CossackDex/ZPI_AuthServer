@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import UsersList from "../UsersList";
+import ServicesList from "../ServicesList";
 import ChangeSiteBar from "../ChangeSiteBar";
 import { Grid, GridRow, GridColumn, Dropdown } from "semantic-ui-react";
 import {aGetUsers} from "../../actions";
@@ -11,7 +11,7 @@ import { connect } from "react-redux";
 export default () => {
   return (
 <div>
-  <UsersList/>
+  <ServicesList/>
 </div>
   );
 };
