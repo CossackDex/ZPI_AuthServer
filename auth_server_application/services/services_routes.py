@@ -33,10 +33,10 @@ def services(user=None):
         return jsonify({'services': services_schema.dump(services_list)}), 200
 
 
-@services_bp.route('/dashboard/service/<service_name>', methods=['GET', 'PUT', 'DELETE'])
+@services_bp.route('/dashboard/services/<service_name>', methods=['GET', 'PUT', 'DELETE'])
 @required_login
 @required_admin
-def service(service_name, user=None):
+def service(user=None, service_name=None):
     if request.method == 'PUT':
         data = request.get_json()
         service_data = Services.query.filter_by(service_name=service_name).first()
