@@ -84,8 +84,10 @@ export const deleteMe = (currentUser, currentPass) => async dispatch => {
 
 export const aGetUser = (a, user) => async dispatch => {
   const response = await flask.get("/dashboard/admin", a)
+  const list = response.data.user
   const {id} = user
-  const thisUser = response.data.users_list[id];
+  let thisUser = null
+  list.forEach(e => {if (e.id == id) {thisUser = e}})
   dispatch({ type: A_GET_USER, payload: thisUser });
 }
 

@@ -119,7 +119,7 @@ class UsersList extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        users: state.admin.users_list,
+        users: state.admin.user,
         username: state.sign.username,
         password: state.sign.password,
         superuser: state.sign.superuser
