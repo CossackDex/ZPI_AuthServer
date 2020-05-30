@@ -2,12 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import {aDeleteUser} from "../actions";
 import {
-  Table,
   Button,
-  Icon,
-  Modal,
-  TableCell,
-  Confirm,
+  Confirm
 } from "semantic-ui-react";
 
 class AdminButtons extends Component {

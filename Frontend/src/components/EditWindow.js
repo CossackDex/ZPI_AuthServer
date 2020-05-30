@@ -4,13 +4,9 @@ import { connect } from "react-redux";
 import { Field, reduxForm } from "redux-form";
 import {
   Form,
-  Grid,
-  GridRow,
-  GridColumn,
   Table,
   Button,
   Icon,
-  Input,
   TableFooter,
   Header,
   Confirm,

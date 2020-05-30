@@ -1,18 +1,11 @@
 import React, { Component } from "react";
 import EditWindow from "../EditWindow";
 import { connect } from "react-redux";
-import history from "../../history";
 
 import {
   Grid,
   GridRow,
-  GridColumn,
-  Table,
-  Button,
-  Icon,
-  Input,
-  TableFooter,
-  Header,
+  GridColumn
 } from "semantic-ui-react";
 
 class StreamUser extends Component {

@@ -1,8 +1,5 @@
 import React from "react";
-import { Route, Link } from "react-router-dom";
-import { Field, reduxForm } from "redux-form";
 import { connect } from "react-redux";
-import history from "../history";
 import { aGetServices } from "../actions"
 
 class ServicesList extends React.Component {
@@ -40,23 +37,6 @@ class ServicesList extends React.Component {
         })
         
     }
-
-    // componentDidUpdate() {
-    //     console.log("Update")
-    //     return(
-    //         <div className="left floated content">
-    //             <h2>Users</h2>
-    //             <div>
-    //                 <i className="content">ID</i>
-    //                 <i className="content">Service</i>
-    //                 <i className="content">Creator</i>
-    //                 <i className="content">IP</i>
-    //                 <i className="content">Create Date</i>
-    //             </div>
-    //             <div className="ui celled list">{this.renderList()}</div>
-    //         </div>
-    //       );
-    // }
 
 
     render() {

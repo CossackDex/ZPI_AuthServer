@@ -1,6 +1,4 @@
 import React from "react";
-import { Route, Link } from "react-router-dom";
-import { Field, reduxForm } from "redux-form";
 import { connect } from "react-redux";
 import history from "../history";
 import { aGetUser, aGetUsers, aBanUser, aDeleteUser, aSanction, aForcePass, aUnbanUser } from "../actions"

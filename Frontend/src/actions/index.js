@@ -10,16 +10,7 @@ import {
   DELETE_ME,
   A_GET_USER,
   A_GET_USERS,
-  A_GET_SERVICES,
-  A_POST_SERVICE,
-  // A_GET_USER,
-  // A_CHANGE_PASS,
-  // A_FORCE_PASS,
-  A_CHANGE_MAIL,
-  // A_FORCE_MAIL,
-  A_DELETE_USER,
-  // S_POWERS,
-  // S_POWER,
+  A_GET_SERVICES
 } from "./types";
 
 export const signIn = ({ username, password }) => async dispatch => {

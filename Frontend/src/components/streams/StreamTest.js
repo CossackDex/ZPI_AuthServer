@@ -1,8 +1,8 @@
 import React from "react";
 
-import Menu from "../Navbar"
+import Navbar from "../Navbar"
 
 export default () => {
-    return <div><Menu/></div>;
+    return <div><Navbar/></div>;
   }
 

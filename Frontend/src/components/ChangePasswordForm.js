@@ -1,16 +1,12 @@
 import React, { Component } from "react";
-import { Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
   Button,
-  Divider,
   Form,
   Grid,
   Segment,
   Header,
-  GridColumn,
-  GridRow,
-  Modal,
-  Icon,
+  GridRow
 } from "semantic-ui-react";
 
 export default class ChangePasswordForm extends Component {
