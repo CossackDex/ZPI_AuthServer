@@ -1,5 +1,5 @@
 import React from "react";
-import EditEmail from "../EditEmail";
+import EditService from "../EditService";
 
 
 
@@ -7,7 +7,7 @@ import EditEmail from "../EditEmail";
 export default () => {
   return (
 <div>
-  <EditEmail/>
+  <EditService/>
 </div>
   );
 };

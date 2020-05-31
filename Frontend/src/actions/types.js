@@ -15,3 +15,4 @@ export const A_DELETE_USER = 'A_DELETE_USER';
 export const S_POWERS = 'S_POWERS';
 export const S_POWER = 'S_POWER';
 export const A_GET_SERVICES = 'A_GET_SERVICES';
+export const A_GET_SERVICE = 'A_GET_SERVICE';

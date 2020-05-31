@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { aChangeMail } from "../actions";
+import { aEditService } from "../actions";
 import { connect } from "react-redux";
 import { Field, reduxForm } from "redux-form";
+import history from "../history"
 import {
   Form,
   Table,
@@ -10,13 +11,8 @@ import {
 } from "semantic-ui-react";
 
 
-class EditEmail extends Component {
-  state = {
-    open: false,
-  };
+class EditService extends Component {
 
-  open = () => this.setState({ open: true });
-  close = () => this.setState({ open: false });
 
   renderInput = ({ input, placeholder, className, meta, type }) => {
     return (
@@ -34,12 +30,13 @@ class EditEmail extends Component {
   };
 
   onSubmit = (formValues) => {
-    const a = {auth: { username: this.props.myusername, password: this.props.mypassword }};
-    const username = this.props.username
-    this.props.aChangeMail(formValues.newmail, a, username);
+    const a = {auth: { username: this.props.username, password: this.props.password }};
+    if (!formValues.newsname) {formValues.newsname = this.props.serviceName}
+    if (!formValues.newip) {formValues.newip = this.props.serviceIp}
+    this.props.aEditService(a, formValues, this.props.serviceName);
+    history.push("/dashboard/admin/services")
   }
   render() {
-    const { username, useremail, role } = this.props;
     return (
       <Form onSubmit={this.props.handleSubmit(this.onSubmit)}>
         <Table color="teal">
@@ -49,12 +46,12 @@ class EditEmail extends Component {
                 <p></p>
                 <p></p>
                 <p>
-                  <Header as="h4">Username: {username}</Header>
+                  <Header as="h4">Service Name: {this.props.serviceName}</Header>
                 </p>
                 {/* </Table.HeaderCell>
             <Table.HeaderCell> */}
                 <p>
-                  <Header as="h4">Current e-mail: {useremail}</Header>
+                  <Header as="h4">Current IP: {this.props.serviceIp}</Header>
                 </p>
                 <p></p>
               </Table.HeaderCell>
@@ -63,14 +60,28 @@ class EditEmail extends Component {
           <Table.Body>
             <Table.Row>
               <Table.Cell width={7}>
-                <b>New e-mail</b>
+                <b>New Service Name</b>
               </Table.Cell>
               <Table.Cell collapsing>
                 <Field
-                  name="newmail"
+                  name="newsname"
                   component={this.renderInput}
                   type="text"
-                  placeholder="New E-mail"
+                  placeholder="New Service Name"
+                  className=""
+                />
+              </Table.Cell>
+            </Table.Row>
+            <Table.Row>
+              <Table.Cell width={7}>
+                <b>New IP</b>
+              </Table.Cell>
+              <Table.Cell collapsing>
+                <Field
+                  name="newip"
+                  component={this.renderInput}
+                  type="text"
+                  placeholder="New IP"
                   className=""
                 />
               </Table.Cell>
@@ -90,19 +101,17 @@ class EditEmail extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    myusername: state.sign.username,
-    mypassword: state.sign.password,
-    username: state.this.username,
+    username: state.sign.username,
     password: state.sign.password,
-    useremail: state.this.email,
-    role: state.sign.role
+    serviceName: state.thisService.service.service_name,
+    serviceIp: state.thisService.service.connection_ip
   };
 };
 
 const formWrapped = reduxForm({
-  form: "editemail",
-})(EditEmail);
+  form: "editservice",
+})(EditService);
 
-export default connect(mapStateToProps, { aChangeMail })(
+export default connect(mapStateToProps, { aEditService })(
   formWrapped
 );

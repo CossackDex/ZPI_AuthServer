@@ -28,10 +28,10 @@ class UsersList extends React.Component {
         this.props.aSanction(a, user);
       }
 
-      onForce = (user) => {
-        const a = {auth: { username: this.props.username, password: this.props.password }};
-        this.props.aForcePass(a, user)
-      }
+    //   onForce = (user) => {
+    //     const a = {auth: { username: this.props.username, password: this.props.password }};
+    //     this.props.aForcePass(a, user)
+    //   }
 
 
     componentDidMount() {
@@ -61,7 +61,7 @@ class UsersList extends React.Component {
                 <div className="item" key={user.id}>
                     <div className="right floated content">
                         <button className="ui button primary" onClick={()=>{this.onEdit(user)}}>Edit</button>
-                        <button className="ui button secondary" onClick={()=>{this.onForce(user.username)}}>Force new pass</button>
+                        {/* <button className="ui button secondary" onClick={()=>{this.onForce(user.username)}}>Force new pass</button> */}
                         <button className="ui button secondary" onClick={()=>{this.onBan(user.username)}}>{this.renderBan()}</button>
                         {this.renderSanction(user)}
                         <button className="ui button negative" onClick={()=>{this.onDelete(user.username)}}>Delete</button>
@@ -106,7 +106,6 @@ class UsersList extends React.Component {
                     <i className="content">Username</i>
                     <i className="content">Email</i>
                     <i className="content">Create Date</i>
-                    <i className="content">Is Banned</i>
                 </div>
                 <div className="ui celled list">{this.renderList()}</div>
             </div>
