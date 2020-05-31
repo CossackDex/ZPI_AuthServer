@@ -7,7 +7,7 @@ class UsersList extends React.Component {
 
     onBan = (user) => {
         const a = {auth: { username: this.props.username, password: this.props.password }};
-        if (!this.props.is_banned) this.props.aBanUser(a, user);
+        if (!user.is_banned) this.props.aBanUser(a, user);
         else {this.props.aUnbanUser(a, user)}
       };
 
@@ -41,8 +41,8 @@ class UsersList extends React.Component {
         }
     }
 
-    renderBan() {
-        if (this.props.is_banned) {return "Unban"}
+    renderBan(user) {
+        if (user.is_banned) {return "Unban"}
         else {return "Ban"}
     }
 
@@ -62,7 +62,7 @@ class UsersList extends React.Component {
                     <div className="right floated content">
                         <button className="ui button primary" onClick={()=>{this.onEdit(user)}}>Edit</button>
                         {/* <button className="ui button secondary" onClick={()=>{this.onForce(user.username)}}>Force new pass</button> */}
-                        <button className="ui button secondary" onClick={()=>{this.onBan(user.username)}}>{this.renderBan()}</button>
+                        <button className="ui button secondary" onClick={()=>{this.onBan(user.username)}}>{this.renderBan(user)}</button>
                         {this.renderSanction(user)}
                         <button className="ui button negative" onClick={()=>{this.onDelete(user.username)}}>Delete</button>
                     </div>
