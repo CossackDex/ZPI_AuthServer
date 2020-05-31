@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { aGetServices } from "../actions"
+import history from "../history"
 
 class ServicesList extends React.Component {
 
@@ -44,7 +45,7 @@ class ServicesList extends React.Component {
             <div>
                 <div>
                 <h2>Services</h2>
-                <button className="right floated content ui button primary " >Create Service</button>
+                <button className="right floated content ui button primary " onClick={()=>{history.push("/dashboard/admin/services/create")}}>Create Service</button>
                 </div>
                 <div>
                     <i className="content">ID</i>

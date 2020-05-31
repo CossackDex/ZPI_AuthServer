@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { aChangeMail } from "../actions";
+import { aPostService } from "../actions";
 import { connect } from "react-redux";
 import { Field, reduxForm } from "redux-form";
 import {
@@ -34,9 +34,8 @@ class EditEmail extends Component {
   };
 
   onSubmit = (formValues) => {
-    const a = {auth: { username: this.props.myusername, password: this.props.mypassword }};
-    const username = this.props.username
-    this.props.aChangeMail(formValues.newmail, a, username);
+    const a = {auth: { username: this.props.username, password: this.props.password }};
+    this.props.aPostService(formValues, a)
   }
   render() {
     const { username, useremail, role } = this.props;
@@ -49,13 +48,10 @@ class EditEmail extends Component {
                 <p></p>
                 <p></p>
                 <p>
-                  <Header as="h4">Username: {username}</Header>
+                  <Header as="h4">Creator: {username}</Header>
                 </p>
                 {/* </Table.HeaderCell>
             <Table.HeaderCell> */}
-                <p>
-                  <Header as="h4">Current e-mail: {useremail}</Header>
-                </p>
                 <p></p>
               </Table.HeaderCell>
             </Table.Row>
@@ -63,14 +59,28 @@ class EditEmail extends Component {
           <Table.Body>
             <Table.Row>
               <Table.Cell width={7}>
-                <b>New e-mail</b>
+                <b>Service name</b>
               </Table.Cell>
               <Table.Cell collapsing>
                 <Field
-                  name="newmail"
+                  name="servicename"
                   component={this.renderInput}
                   type="text"
-                  placeholder="New E-mail"
+                  placeholder="Service name"
+                  className=""
+                />
+              </Table.Cell>
+            </Table.Row>
+            <Table.Row>
+              <Table.Cell width={7}>
+                <b>IP address</b>
+              </Table.Cell>
+              <Table.Cell collapsing>
+                <Field
+                  name="ipaddress"
+                  component={this.renderInput}
+                  type="text"
+                  placeholder="IP address"
                   className=""
                 />
               </Table.Cell>
@@ -90,11 +100,8 @@ class EditEmail extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    myusername: state.sign.username,
-    mypassword: state.sign.password,
-    username: state.this.username,
+    username: state.sign.username,
     password: state.sign.password,
-    useremail: state.this.email,
     role: state.sign.role
   };
 };
@@ -103,6 +110,6 @@ const formWrapped = reduxForm({
   form: "editemail",
 })(EditEmail);
 
-export default connect(mapStateToProps, { aChangeMail })(
+export default connect(mapStateToProps, { aPostService })(
   formWrapped
 );

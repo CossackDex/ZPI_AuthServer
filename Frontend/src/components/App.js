@@ -12,6 +12,8 @@ import StreamAdmin from "./streams/StreamAdmin";
 import StreamUser from "./streams/StreamUser";
 import StreamServices from "./streams/StreamServices";
 import StreamEditEmail from "./streams/StreamEditEmail";
+import StreamCreateService from "./streams/StreamCreateService";
+
 
 import Navbar from "./Navbar";
 
@@ -22,15 +24,13 @@ const App = () => {
       <Router history={history}>
         <Navbar></Navbar>
         <Switch>
-
           <Route path="/" exact component={StreamTest} />
           <Route path="/dashboard/login" exact component={StreamLogin} />
           <Route path="/dashboard/register" exact component={StreamReg} />
-
           <Route path="/dashboard/admin/users" exact component={StreamAdmin} />
           <Route path="/dashboard/admin/users/:id/email" exact component={StreamEditEmail} />
           <Route path="/dashboard/admin/services" exact component={StreamServices}/>
-
+          <Route path="/dashboard/admin/services/create" exact component={StreamCreateService}/>
           {role > -1 && <Route path="/dashboard/user" exact component={StreamUser} />}
         </Switch>
       </Router>

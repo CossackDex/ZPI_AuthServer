@@ -136,11 +136,13 @@ export const aGetServices = (a) => async dispatch => {
 }
 
 export const aPostService = (formValues, a) => async dispatch => {
-  const f = { ...formValues };
-  await flask.post("/dashboard/services", f, a);
-  const response = await flask.get("/dashboard/services", a);
-  dispatch({ type: A_GET_SERVICES, payload: response.data });
-  history.push("/dashboard/admin/services");
+  const nserv = {connection_ip: formValues.ipaddress, service_name: formValues.servicename}
+  console.log(a)
+  const response = await flask.post("/dashboard/services", nserv, a);
+  if (response) {
+    history.push("/dashboard/admin/services");
+}
+  else {alert(response.data.message)}
 };
 
 // export const aGetService = (a, service_name) => async dispatch => {
