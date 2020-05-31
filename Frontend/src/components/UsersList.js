@@ -106,7 +106,6 @@ class UsersList extends React.Component {
                     <i className="content">Username</i>
                     <i className="content">Email</i>
                     <i className="content">Create Date</i>
-                    <i className="content">Is Banned</i>
                 </div>
                 <div className="ui celled list">{this.renderList()}</div>
             </div>

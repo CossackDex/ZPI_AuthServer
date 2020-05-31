@@ -10,7 +10,8 @@ import {
   DELETE_ME,
   A_GET_USER,
   A_GET_USERS,
-  A_GET_SERVICES
+  A_GET_SERVICES,
+  A_GET_SERVICE
 } from "./types";
 
 export const signIn = ({ username, password }) => async dispatch => {
@@ -137,7 +138,6 @@ export const aGetServices = (a) => async dispatch => {
 
 export const aPostService = (formValues, a) => async dispatch => {
   const nserv = {connection_ip: formValues.ipaddress, service_name: formValues.servicename}
-  console.log(a)
   const response = await flask.post("/dashboard/services", nserv, a);
   if (response) {
     history.push("/dashboard/admin/services");
@@ -145,8 +145,23 @@ export const aPostService = (formValues, a) => async dispatch => {
   else {alert(response.data.message)}
 };
 
-// export const aGetService = (a, service_name) => async dispatch => {
-//   const response = await flask.get("/dashboard/service/"+service_name, a)
-//   dispatch({ type: A_GET_SERVICE, payload: response.data });
-//   history.push("/dashboard/admin/services");
-// }
+export const aDeleteService = (a, service) => async dispatch => {
+  const sname = service.service_name
+  const response = await flask.delete("/dashboard/services/"+sname, a);
+  if (response) {
+    const response2 = await flask.get("/dashboard/services", a)
+    dispatch({ type: A_GET_SERVICES, payload: response2.data });
+}
+  else {alert(response.data.message)}
+};
+
+export const aGetService = (a, service_name) => async dispatch => {
+  const response = await flask.get("/dashboard/services/"+service_name, a)
+  dispatch({ type: A_GET_SERVICE, payload: response.data });
+  history.push("/dashboard/admin/services/edit/"+service_name)
+}
+
+export const aEditService = (a, formValues, currentname) => async dispatch => {
+  const nserv = {connection_ip: formValues.newip, service_name: formValues.newsname}
+  await flask.put("/dashboard/services/"+currentname, nserv, a);
+};
