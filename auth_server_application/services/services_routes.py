@@ -58,4 +58,5 @@ def service(user=None, service_name=None):
         return jsonify(message='service - {} has been deleted'.format(service_data.service_name)), 200
     else:
         service_data = Services.query.filter_by(service_name=service_name).first()
-        return jsonify(service_data), 200
+        services_schema = ServicesSchema()
+        return jsonify({'service': services_schema.dump(service_data)}), 200
