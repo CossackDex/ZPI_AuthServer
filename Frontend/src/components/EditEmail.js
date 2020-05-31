@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { aChangeMail } from "../actions";
 import { connect } from "react-redux";
 import { Field, reduxForm } from "redux-form";
+import history from "../history";
+
 import {
   Form,
   Table,
@@ -37,6 +39,7 @@ class EditEmail extends Component {
     const a = {auth: { username: this.props.myusername, password: this.props.mypassword }};
     const username = this.props.username
     this.props.aChangeMail(formValues.newmail, a, username);
+    history.push("/dashboard/admin/users")
   }
   render() {
     const { username, useremail, role } = this.props;
@@ -77,7 +80,7 @@ class EditEmail extends Component {
             </Table.Row>
             <Table.Row>
               <Table.Cell collapsing>
-              <Button color="teal" type="submit">Confirm</Button>
+                <Button color="teal" type="submit">Confirm</Button>
               </Table.Cell>
             </Table.Row>
           </Table.Body>

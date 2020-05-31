@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Table, Button, Icon, Modal, TableCell } from "semantic-ui-react";
-// import ModalScreen from "./ModalScreen";
+import ModalScreen from "./ModalScreen";
 import AdminButtons from "./AdminButtons";
 
 
@@ -16,10 +16,10 @@ export default class UsersTable extends Component {
         <Table.Cell width={2}>{user.email}</Table.Cell>
         <Table.Cell width={2}>{user.created_date}</Table.Cell>
         <Table.Cell width={2}>
-          {/* <ModalScreen
-          username={user.username}
-          useremail={user.email}
-          role={user.role}></ModalScreen> */}
+          <ModalScreen
+          username_edit={user.username}
+          useremail_edit={user.email}
+          role_edit={user.role}></ModalScreen>
         </Table.Cell>
         <Table.Cell width={1}>
           <AdminButtons user={user}></AdminButtons>

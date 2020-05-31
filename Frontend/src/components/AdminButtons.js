@@ -6,6 +6,7 @@ import {
 } from "semantic-ui-react";
 import { aGetUser, aGetUsers, aBanUser, aDeleteUser, aSanction, aForcePass, aUnbanUser } from "../actions"
 
+import history from "../history";
 
 class AdminButtons extends Component {
   state = {
@@ -15,6 +16,16 @@ class AdminButtons extends Component {
     open: false,
   };
 
+  onEdit = (user) => {
+    const a = {auth: { username: this.props.username, password: this.props.password }};
+    this.props.aGetUser(a, user)
+    history.push("/dashboard/admin/users/"+user.id+"/email")
+  };
+
+  onSanction = (user) => {
+    const a = {auth: { username: this.props.username, password: this.props.password }};
+    this.props.aSanction(a, user);
+  }
 
   onDelete = (user) => {
     const a = {auth: { username: this.props.username, password: this.props.password }};
@@ -36,6 +47,9 @@ class AdminButtons extends Component {
 
     return (
       <Button.Group>
+        <Button inverted color="blue" onClick={()=>{this.onEdit(user)}}>
+          Edit
+        </Button>
         <Button
           content={banned ? "Banned" : "Ban"}
           color={banned ? "red" : "grey"}
