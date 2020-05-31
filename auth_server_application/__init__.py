@@ -38,8 +38,8 @@ def create_app():
         app.register_blueprint(jwt_rest_routes.jwt_rest_bp)
         app.register_blueprint(user_routes.user_bp)
         app.register_blueprint(services_routes.services_bp)
-        db.drop_all()
-        db.create_all()
+        # db.drop_all()
+        # db.create_all()
 
         # Create superuser
         # Create if statement for checking is superuser is already created
