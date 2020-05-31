@@ -1,1 +1,1 @@
-web: gunicorn wsgi:app
+gunicorn = gunicorn -w 3 wsgi:app
