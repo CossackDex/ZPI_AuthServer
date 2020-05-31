@@ -1,7 +1,7 @@
 import React from "react";
 import LogForm from "../LogForm";
 import { Grid, GridRow, GridColumn } from "semantic-ui-react";
-import ChangePasswordForm from "../ChangePasswordForm";
+//import ChangePasswordForm from "../ChangePasswordForm";
 
 export default () => {
   return (
@@ -13,7 +13,7 @@ export default () => {
         <GridColumn width={5}></GridColumn>
         <GridColumn width={6}>
           <LogForm></LogForm>
-          <ChangePasswordForm></ChangePasswordForm>
+          {/* <ChangePasswordForm></ChangePasswordForm> */}
           </GridColumn>
         <GridColumn width={5}></GridColumn>
       </GridRow>
