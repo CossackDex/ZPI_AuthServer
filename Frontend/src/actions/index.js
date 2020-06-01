@@ -17,6 +17,13 @@ import {
 export const signIn = ({ username, password }) => async dispatch => {
   const a = { auth: { username: username, password: password } };
   const response = await flask.get("/dashboard/user", a);
+  const i = 0;
+  while (!response) {  const response = await flask.get("/dashboard/user", a);
+  i += 1;
+  if (i>4) {
+    break
+  }
+}
   if (response) {
     const p = {...response.data, password: password }
     dispatch({ type: SIGN_IN, payload: p })
@@ -34,7 +41,13 @@ export const signOut = () => {
 
 export const signUp = formValues => async dispatch => {
   const f = { ...formValues };
-  await flask.post("/dashboard/signup", f);
+  const response0 = await flask.post("/dashboard/signup", f);
+  const i = 0;
+  while (!response0) {  const response0 = await flask.post("/dashboard/signup", f);
+  i += 1;
+  if (i>4) {
+    break
+  }}
   const a = {
     auth: { username: formValues.username, password: formValues.password },
   };
@@ -163,5 +176,6 @@ export const aGetService = (a, service_name) => async dispatch => {
 
 export const aEditService = (a, formValues, currentname) => async dispatch => {
   const nserv = {connection_ip: formValues.newip, service_name: formValues.newsname}
-  await flask.put("/dashboard/services/"+currentname, nserv, a);
+  const response = await flask.put("/dashboard/services/"+currentname, nserv, a);
+  if (!response) {alert(response.data.message)}
 };
