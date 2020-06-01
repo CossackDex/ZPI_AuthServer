@@ -61,6 +61,7 @@ class DashBoard extends React.Component {
 //     this.updateList()
 //   }
   shouldComponentUpdate(nextProps, nextState){
+    if(nextState !== this.state) return true
     if (this.props.users) {
         const ul = JSON.stringify(Object.values(this.props.users))
         const nextul = JSON.stringify(Object.values(nextProps.users))
