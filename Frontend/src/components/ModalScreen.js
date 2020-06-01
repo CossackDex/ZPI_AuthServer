@@ -2,7 +2,15 @@ import React, { Component } from "react";
 import { aChangeMail } from "../actions";
 import { connect } from "react-redux";
 import { Field, reduxForm } from "redux-form";
-import { Form, Button, Icon, Modal, Table, Header } from "semantic-ui-react";
+import {
+  Form,
+  Button,
+  Icon,
+  Modal,
+  Table,
+  Header,
+  Tab,
+} from "semantic-ui-react";
 import { Route } from "react-router-dom";
 import EditWindow from "./EditWindow";
 import history from "../history";
@@ -27,20 +35,23 @@ class ModalScreen extends Component {
       </div>
     );
   };
-//   onSubmit = () => {
-//     const a = {
-//       auth: { username: this.props.username, password: this.props.password },
-//     };
-//     this.props.aChangeMail();
-//     history.push("dashboard/admin/users");
-//   };
+  //   onSubmit = () => {
+  //     const a = {
+  //       auth: { username: this.props.username, password: this.props.password },
+  //     };
+  //     this.props.aChangeMail();
+  //     history.push("dashboard/admin/users");
+  //   };
   onSubmit = (formValues) => {
-    console.log('os')
-    console.log(formValues)
-    const a = {auth: { username: this.props.username, password: this.props.password }};
-    const username = this.props.username_edit
+    console.log("os");
+    console.log(formValues);
+    const a = {
+      auth: { username: this.props.username, password: this.props.password },
+    };
+    const username = this.props.username_edit;
     this.props.aChangeMail(formValues.newmail, a, username);
-  }
+    this.close();
+  };
 
   render() {
     const { open, dimmer } = this.state;
@@ -101,23 +112,30 @@ class ModalScreen extends Component {
                     />
                   </Table.Cell>
                 </Table.Row>
+                <Table.Row>
+                  <Table.Cell>
+                    <Button color="black" onClick={this.close}>
+                      Cancel
+                    </Button>
+                  </Table.Cell>
+                  <Table.Cell>
+                    <Modal.Actions>
+                      <Button
+                        color="teal"
+                        icon="edit"
+                        labelPosition="right"
+                        content="Confirm"
+                        type="submit"
+                        //   onClick={this.close}
+                      />
+                    </Modal.Actions>
+                  </Table.Cell>
+                </Table.Row>
+                <Table.Row></Table.Row>
               </Table.Body>
             </Table>
-            <Modal.Actions>
-            <Button color="black" onClick={this.close}>
-              Cancel
-            </Button>
-            <Button
-              color="teal"
-              icon="edit"
-              labelPosition="right"
-              content="Save changes"
-              type="submit"
-              onClick={this.close}
-            />
-          </Modal.Actions>
           </Form>
-
+          <div></div>
         </Modal>
       </div>
     );

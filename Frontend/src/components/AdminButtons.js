@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import {
   Button,
-  Confirm
+  Confirm,
+  Icon
 } from "semantic-ui-react";
 import { aGetUser, aGetUsers, aBanUser, aDeleteUser, aSanction, aForcePass, aUnbanUser } from "../actions"
 
@@ -47,7 +48,9 @@ class AdminButtons extends Component {
 
     return (
       <Button.Group>
-        <Button inverted color="blue" onClick={()=>{this.onEdit(user)}}>
+        <Button color="teal" onClick={()=>{this.onEdit(user)}}
+        content={"Edit"}>
+        {/* <Icon name="edit" /> */}
           Edit
         </Button>
         <Button

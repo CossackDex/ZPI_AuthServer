@@ -21,6 +21,7 @@ export default class ChangeSiteBar extends Component {
         // defaultActivePage={1}
         firstItem={null}
         lastItem={null}
+        ellipsisItem={null}
         pointing
         secondary
         totalPages={pages}
