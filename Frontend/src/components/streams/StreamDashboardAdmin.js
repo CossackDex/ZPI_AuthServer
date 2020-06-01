@@ -44,7 +44,7 @@ class DashBoard extends React.Component {
     numberOptions: numberOptions,
   };
 
-  componentDidMount() {
+  updateList(){
     const a = {auth: { username: this.props.username, password: this.props.password }};
         if (a) {
         console.log('get')
@@ -53,9 +53,34 @@ class DashBoard extends React.Component {
     if (this.props.users) {
         const ul = Object.values(this.props.users)
         console.log(ul)
-        this.setState({ users_list: ul });
+        // this.setState({ users_list: ul });
+        return ul
     }
   }
+//   componentDidMount() {
+//     this.updateList()
+//   }
+  shouldComponentUpdate(nextProps, nextState){
+    if (this.props.users) {
+        const ul = JSON.stringify(Object.values(this.props.users))
+        const nextul = JSON.stringify(Object.values(nextProps.users))
+        if(ul === nextul) return false
+    }
+    
+    return true
+  }
+//   componentDidUpdate(){
+//     const a = {auth: { username: this.props.username, password: this.props.password }};
+//         if (a) {
+//         console.log('get')
+//         this.props.aGetUsers(a);
+//         }
+//     if (this.props.users) {
+//         const ul = Object.values(this.props.users)
+//         console.log(ul)
+//         this.setState({ users_list: ul });
+//     }  }
+
 
   countPages = (users_list) => {
     return Math.ceil(users_list.length / this.state.usersPerPage);
@@ -70,7 +95,10 @@ class DashBoard extends React.Component {
 
 
   render() {
-    const { activePage, usersPerPage, users_list, numberOptions } = this.state;
+    const users_list = this.updateList()
+    const { activePage, usersPerPage, numberOptions } = this.state;
+    // const { activePage, usersPerPage, users_list, numberOptions } = this.state;
+
     if (!this.props.users) {
         return <div>LOADING</div>
     }
