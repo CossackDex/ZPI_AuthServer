@@ -13,8 +13,8 @@ import ModalScreen from "./ModalScreen";
 class AdminButtons extends Component {
   state = {
     banned: false,
-    color: "grey",
-    name: "Unbaned",
+    color: "red",
+    name: "Unban",
     open: false,
   };
 
@@ -27,7 +27,7 @@ class AdminButtons extends Component {
   onSanction = (user) => {
     const a = {auth: { username: this.props.username, password: this.props.password }};
     this.props.aSanction(a, user);
-  }
+  };
 
   onDelete = (user) => {
     const a = {auth: { username: this.props.username, password: this.props.password }};
@@ -53,6 +53,8 @@ class AdminButtons extends Component {
   //   else {this.props.aUnbanUser(a, user)}
   // };
 
+  
+
   renderBan(user) {
     if (user.is_banned) {return "Unban"}
     else {return "Ban"}
@@ -61,6 +63,8 @@ class AdminButtons extends Component {
 //     if (this.props.is_banned) {return "Unban"}
 //     else {return "Ban"}
 // }
+
+
   open = () => this.setState({ open: true });
   close = () => this.setState({ open: false });
 
@@ -79,7 +83,7 @@ class AdminButtons extends Component {
           // content={banned ? "Banned" : "Ban"}
           content={this.renderBan(user)}
 
-          color={this.renderBan(user)=='Ban' ? "red" : "grey"}
+          color={this.renderBan(user)=='Ban' ? "grey" : "red"}
           // active={banned}
           onClick={() => this.onBan(user)}
         ></Button>
