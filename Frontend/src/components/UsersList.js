@@ -7,8 +7,6 @@ class UsersList extends React.Component {
 
     onBan = (user) => {
         const a = {auth: { username: this.props.username, password: this.props.password }};
-        // if (!this.props.is_banned) this.props.aBanUser(a, user);
-        // else {this.props.aUnbanUser(a, user)}
         if (!user.is_banned) this.props.aBanUser(a, user.username);
         else if (user.is_banned) {this.props.aUnbanUser(a, user.username)}
       };
@@ -61,12 +59,12 @@ class UsersList extends React.Component {
         return u.map(user => {
             if (user.role===true && this.props.superuser===false) { return null}
             else {
-                return(
+
+            return(
                 <div className="item" key={user.id}>
                     <div className="right floated content">
                         <button className="ui button primary" onClick={()=>{this.onEdit(user)}}>Edit</button>
                         {/* <button className="ui button secondary" onClick={()=>{this.onForce(user.username)}}>Force new pass</button> */}
-                        {/* <button className="ui button secondary" onClick={()=>{this.onBan(user.username)}}>{this.renderBan()}</button> */}
                         <button className="ui button secondary" onClick={()=>{this.onBan(user)}}>{this.renderBan(user)}</button>
                         {this.renderSanction(user)}
                         <button className="ui button negative" onClick={()=>{this.onDelete(user.username)}}>Delete</button>
@@ -79,7 +77,9 @@ class UsersList extends React.Component {
                     <i className="content">{user.created_date}</i>
                     </div>
                 </div>
-            )}
+            )
+            }
+
         })
     
     }

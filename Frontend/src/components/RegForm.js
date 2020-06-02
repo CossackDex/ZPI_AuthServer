@@ -29,7 +29,6 @@ class RegForm extends React.Component {
   onSubmit = (formValues) => {
     if (!formValues.role) {formValues.role = 0}
     if (!formValues.superuser) {formValues.superuser = 0}
-    console.log(formValues)
     this.props.signUp(formValues)
   }
 

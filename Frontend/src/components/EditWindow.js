@@ -53,7 +53,7 @@ class EditWindow extends Component {
       this.props.changePass(formValues.newpass, a);
     }
     else {
-      return console.log("Nothing to do")
+      return alert("Wrong input")
     }
 
     };
