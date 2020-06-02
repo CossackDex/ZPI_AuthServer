@@ -68,7 +68,7 @@ import {
                 <Button content="Login" type="submit" color="teal" />
             </GridColumn>
             <GridColumn width={5}>
-              <Modal
+              {/* <Modal
                 trigger={
                   <Button size="mini" onClick={this.show}>
                     Forget password?
@@ -94,7 +94,7 @@ import {
                     <Icon name="checkmark" /> Send
                   </Button>
                 </Modal.Actions>
-              </Modal>
+              </Modal> */}
 
               {/* <Confirm
                 open={this.state.open}

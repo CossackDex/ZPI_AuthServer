@@ -21,7 +21,7 @@ def admin(user=None):
 @required_login
 @required_admin
 @required_superadmin
-def admin_user_give_privileges(username):
+def admin_user_give_privileges(user=None,username=None):
     user = User.query.filter_by(username=username).first()
     if not user:
         return jsonify(message="No account with provided username - {}".format(username)), 409
@@ -36,7 +36,7 @@ def admin_user_give_privileges(username):
 @admin_bp.route('/dashboard/admin/user/<username>/change_email', methods=['POST'])
 @required_login
 @required_admin
-def admin_user_change_email(username):
+def admin_user_change_email(user=None,username=None):
     data = request.get_json()
     new_email = data['new_email']
     user = User.query.filter_by(username=username).first()
@@ -53,7 +53,7 @@ def admin_user_change_email(username):
 @admin_bp.route('/dashboard/admin/user/<username>/delete_account', methods=['GET'])
 @required_login
 @required_admin
-def admin_user_delete_account(username):
+def admin_user_delete_account(user=None,username=None):
     user = User.query.filter_by(username=username).first()
     if not user:
         return jsonify(message="No account with provided username - {}".format(username)), 409
@@ -68,7 +68,7 @@ def admin_user_delete_account(username):
 @admin_bp.route('/dashboard/admin/user/<username>/ban_user', methods=['GET'])
 @required_login
 @required_admin
-def admin_user_ban_user(username):
+def admin_user_ban_user(user=None,username=None):
     user = User.query.filter_by(username=username).first()
     if not user:
         return jsonify(message="No account with provided username - {}".format(username)), 409
@@ -83,7 +83,7 @@ def admin_user_ban_user(username):
 @admin_bp.route('/dashboard/admin/user/<username>/unban_user', methods=['GET'])
 @required_login
 @required_admin
-def admin_user_unban_user(username):
+def admin_user_unban_user(user=None,username=None):
     user = User.query.filter_by(username=username).first()
     if not user:
         return jsonify(message="No account with provided username - {}".format(username)), 409
@@ -95,16 +95,16 @@ def admin_user_unban_user(username):
     return jsonify(message='user - {} is unbanned now'.format(user.username)), 200
 
 
-@admin_bp.route('/dashboard/admin/user/<username>/force_password_change', methods=['GET'])
-@required_login
-@required_admin
-def admin_user_force_password_change(username):
-    user = User.query.filter_by(username=username).first()
-    if not user:
-        return jsonify(message="No account with provided username - {}".format(username)), 409
-    user.force_password_change = True
-    try:
-        db.session.commit()
-    except IntegrityError as e:
-        return jsonify(message="db error", error_message=str(e.orig)), 400
-    return jsonify(message='user - {} now need to change password before login'.format(user.username)), 200
+# @admin_bp.route('/dashboard/admin/user/<username>/force_password_change', methods=['GET'])
+# @required_login
+# @required_admin
+# def admin_user_force_password_change(username):
+#     user = User.query.filter_by(username=username).first()
+#     if not user:
+#         return jsonify(message="No account with provided username - {}".format(username)), 409
+#     user.force_password_change = True
+#     try:
+#         db.session.commit()
+#     except IntegrityError as e:
+#         return jsonify(message="db error", error_message=str(e.orig)), 400
+#     return jsonify(message='user - {} now need to change password before login'.format(user.username)), 200
