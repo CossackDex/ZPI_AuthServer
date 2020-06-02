@@ -87,9 +87,10 @@ class EditService extends Component {
               </Table.Cell>
             </Table.Row>
             <Table.Row>
-              <Table.Cell collapsing>
-              <Button color="teal" type="submit">Confirm</Button>
+              <Table.Cell collapsing colSpan='2'>
+              <Button color="teal" floated="right" type="submit">Confirm</Button>
               </Table.Cell>
+              
             </Table.Row>
           </Table.Body>
 

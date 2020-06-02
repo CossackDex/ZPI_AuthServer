@@ -73,7 +73,7 @@ class EditEmail extends Component {
             </Table.Row>
             <Table.Row>
               <Table.Cell width={7}>
-                <b>IP address</b>
+                <b>Connection IP</b>
               </Table.Cell>
               <Table.Cell collapsing>
                 <Field
@@ -86,8 +86,8 @@ class EditEmail extends Component {
               </Table.Cell>
             </Table.Row>
             <Table.Row>
-              <Table.Cell collapsing>
-              <Button color="teal" type="submit">Confirm</Button>
+              <Table.Cell collapsing colSpan="2">
+              <Button color="teal" floated="right" type="submit">Confirm</Button>
               </Table.Cell>
             </Table.Row>
           </Table.Body>
