@@ -80,7 +80,7 @@ class EditEmail extends Component {
             </Table.Row>
             <Table.Row>
               <Table.Cell collapsing>
-              <Button color="teal" type="submit">Confirm</Button>
+                <Button color="teal" type="submit">Confirm</Button>
               </Table.Cell>
             </Table.Row>
           </Table.Body>
