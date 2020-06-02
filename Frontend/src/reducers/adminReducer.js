@@ -1,4 +1,4 @@
-import { A_GET_USERS, CHANGE_MAIL } from "../actions/types";
+import { A_GET_USERS } from "../actions/types";
 
 export default (state = {}, action) => {
   switch (action.type) {
@@ -7,8 +7,6 @@ export default (state = {}, action) => {
         ...state,
         ...action.payload,
       };
-    case CHANGE_MAIL:
-      return state
     default:
       return state;
   }
