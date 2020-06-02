@@ -8,11 +8,6 @@ import { connect } from "react-redux";
 
 
 const numberOptions = [
-    {
-    key: 2,
-    text: 2,
-    value: 2,
-    },
   {
     key: 10,
     text: 10,
