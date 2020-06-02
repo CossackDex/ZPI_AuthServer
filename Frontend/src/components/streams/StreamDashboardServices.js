@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Grid, GridRow, GridColumn, Dropdown, Table } from "semantic-ui-react";
+import { Grid, GridRow, GridColumn, Dropdown, Table, Loader } from "semantic-ui-react";
 import ChangeSiteBar from "../ChangeSiteBar";
 import ServicesTable from "../ServicesTable";
 import { connect } from "react-redux";
@@ -120,7 +120,7 @@ class AvailableServices extends Component {
     
     render() {
     if (!this.props.services) {
-        return <div>LOADING</div>
+        return <Grid centered><Grid.Row></Grid.Row><Grid.Row></Grid.Row><Loader active inline>Loading</Loader></Grid>
     }
     const { activePage, servicesPerPage, numberOptions  } = this.state;
     const services = this.updateList()
