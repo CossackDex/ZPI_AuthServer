@@ -59,6 +59,7 @@ class UsersList extends React.Component {
         return u.map(user => {
             if (user.role===true && this.props.superuser===false) { return null}
             else {
+
             return(
                 <div className="item" key={user.id}>
                     <div className="right floated content">
@@ -78,25 +79,26 @@ class UsersList extends React.Component {
                 </div>
             )
             }
+
         })
-        
+    
     }
 
     componentDidUpdate() {
         console.log("Update")
-        return(
-            <div className="left floated content">
-                <h2>Users</h2>
-                <div>
-                    <i className="content">ID</i>
-                    <i className="content">Username</i>
-                    <i className="content">Email</i>
-                    <i className="content">Create Date</i>
-                    <i className="content">Is Banned</i>
-                </div>
-                <div className="ui celled list">{this.renderList()}</div>
-            </div>
-          );
+        // return(
+        //     <div className="left floated content">
+        //         <h2>Users</h2>
+        //         <div>
+        //             <i className="content">ID</i>
+        //             <i className="content">Username</i>
+        //             <i className="content">Email</i>
+        //             <i className="content">Create Date</i>
+        //             <i className="content">Is Banned</i>
+        //         </div>
+        //         <div className="ui celled list">{this.renderList()}</div>
+        //     </div>
+        //   );
     }
 
 
