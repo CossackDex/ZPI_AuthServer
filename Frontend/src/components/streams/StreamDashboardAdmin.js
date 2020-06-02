@@ -8,11 +8,6 @@ import { connect } from "react-redux";
 
 
 const numberOptions = [
-    {
-    key: 2,
-    text: 2,
-    value: 2,
-    },
   {
     key: 10,
     text: 10,
@@ -56,6 +51,7 @@ class DashBoard extends React.Component {
         // this.setState({ users_list: ul });
         return ul
     }
+    return []
   }
 //   componentDidMount() {
 //     this.updateList()
@@ -93,10 +89,19 @@ class DashBoard extends React.Component {
     this.setState({ usersPerPage: value, activePage: 1 });
   // handleDropdownClick = (e, d) => this.setState({usersPerPage: d.value});
 
+  isNotAdmin = (user, index, arr) => {
+      if (user.role===true && this.props.superuser===false) return false
+      return true
+    }
 
 
   render() {
-    const users_list = this.updateList()
+    const users_list = this.updateList().filter(this.isNotAdmin)
+    
+    // if (users_list){
+    //   users_list = users_list.filter(this.isNotAdmin);
+    // }
+    
     const { activePage, usersPerPage, numberOptions } = this.state;
     // const { activePage, usersPerPage, users_list, numberOptions } = this.state;
 

@@ -32,6 +32,7 @@ class AdminButtons extends Component {
   onDelete = (user) => {
     const a = {auth: { username: this.props.username, password: this.props.password }};
     this.props.aDeleteUser(a, user);
+    this.close()
   };
 
   // onBan = (user) => {
