@@ -16,11 +16,11 @@ import {
 
 export const signIn = ({ username, password }) => async (dispatch) => {
   const a = { auth: { username: username, password: password } };
-  const response = null;
+  let response = null;
   let i = 0;
   let e = 0;
   while (!response) {
-    const response = await flask.get("/dashboard/user", a).catch((error) => {
+    response = await flask.get("/dashboard/user", a).catch((error) => {
       e = error.response.request.response;
     });
     i += 1;
@@ -35,7 +35,7 @@ export const signIn = ({ username, password }) => async (dispatch) => {
       history.push("/dashboard/admin/users");
     } else {
       history.push("/dashboard/user");
-    } //Później warto dodać info o błędnej nazwie lub haśle
+    }
   } else {
     alert(e);
   }
@@ -54,15 +54,17 @@ export const signUp = (formValues) => async (dispatch) => {
   let e = 0;
   let response0 = 0;
   while (!response0) {
-    const response0 = await flask
-      .post("/dashboard/signup", f)
-      .catch((error) => {
-        if (error.request.response.message) {
-          e = error.request.response.message;
-        } else {
-          e = JSON.parse(error.request.response).message;
-        }
-      });
+    response0 = await flask.post("/dashboard/signup", f).catch((error) => {
+      if (error.request.response.message) {
+        e = error.request.response.message;
+      } else if (error.request.response[0] == "<") {
+        e = JSON.parse(
+          error.request.response[(0, error.request.response.length)]
+        ).message;
+      } else {
+        e = JSON.parse(error.request.response).message;
+      }
+    });
     i += 1;
     if (i > 4) {
       break;
