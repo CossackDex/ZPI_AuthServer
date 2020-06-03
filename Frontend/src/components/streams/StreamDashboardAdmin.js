@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import UsersTable from "../UsersTable";
 import ChangeSiteBar from "../ChangeSiteBar";
-import { Grid, GridRow, GridColumn, Dropdown } from "semantic-ui-react";
+import { Grid, GridRow, GridColumn, Dropdown, Dimmer, Loader } from "semantic-ui-react";
 import {aGetUsers} from "../../actions";
 import { Field, reduxForm } from "redux-form";
 import { connect } from "react-redux";
@@ -106,7 +106,8 @@ class DashBoard extends React.Component {
     // const { activePage, usersPerPage, users_list, numberOptions } = this.state;
 
     if (!this.props.users) {
-        return <div>LOADING</div>
+        return  <Grid centered><Grid.Row></Grid.Row><Grid.Row></Grid.Row><Loader active inline>Loading</Loader></Grid>
+        // <div>LOADING</div>
     }
     return (
       <Grid>
