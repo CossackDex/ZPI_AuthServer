@@ -24,7 +24,7 @@ export const signIn = ({ username, password }) => async (dispatch) => {
       e = error.response.request.response;
     });
     i += 1;
-    if (i > 4 || e) {
+    if (i > 4) {
       break;
     }
   }
@@ -64,7 +64,7 @@ export const signUp = (formValues) => async (dispatch) => {
         }
       });
     i += 1;
-    if (i > 4 || e) {
+    if (i > 4) {
       break;
     }
   }
